@@ -37,7 +37,13 @@ $(document).ready(function () {
                     alert("Registration successful!");
                     // Redirect the user to the login page or perform any other necessary action
                 } else {
-                    alert(response); // Display the error message received from PHP
+                    if (response === "Username already exists") {
+                        $("#username").addClass("border-danger");
+                    }
+                    if (response.toString() === "Email already exists") {
+                        
+                    }
+                    // alert(response); // Display the error message received from PHP
                 }
             },
             error: function () {
