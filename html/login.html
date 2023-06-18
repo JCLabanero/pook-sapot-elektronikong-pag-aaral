@@ -11,23 +11,22 @@
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="w-100 m-auto">
-        <form action="php/accountRetrieve.php" id="loginForm" name="loginForm" method="post" class=" m-auto p-3 rounded" style="max-width: 350px;">
+        <form id="loginForm" name="loginForm" method="post" class=" m-auto p-3 rounded" style="max-width: 350px;">
             <h1>Sign In</h1>
             <div class="mt-4 form-floating">
-                <input type="email" class="form-control rounded-0 rounded-top" id="floatingInput1" placeholder="name@example.com" aria-describedby="emailHelp" required>
-                <label for="floatingInput1" class="form-label">Email address</label>
+                <input type="text" class="form-control rounded-0 rounded-top" id="user" placeholder="name@example.com" required>
+                <label for="user" class="form-label">Username</label>
             </div>
             <div class="mb-3 form-floating">
-                <input type="password" class="form-control rounded-0 rounded-bottom" id="exampleInputPassword1" placeholder="Password123+_" required>
-                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control rounded-0 rounded-bottom" id="password" placeholder="Password123+_" required>
+                <label for="password" class="form-label">Password</label>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Remember me</label>
             </div>
-            
             <div class="mb-3">
-                <button type="Sign In" class="btn btn-primary w-100" value="submit">Submit</button>
+                <button type="Sign In" class="btn btn-primary w-100">Submit</button>
             </div>
         </form>
     </main>
@@ -36,4 +35,5 @@
 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" 
 crossorigin="anonymous"></script>
+<script src="../js/login.js"></script>
 </html>

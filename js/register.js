@@ -4,7 +4,7 @@ $(document).ready(function () {
         event.preventDefault(); // Prevent the default form submission
 
         // Get the form values
-        var username = $("#username").val();
+        var username = $("#username").val().toLowerCase();
         var password = $("#password").val();
         var email = $("#email").val();
 
