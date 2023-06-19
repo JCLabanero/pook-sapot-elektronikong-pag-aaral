@@ -35,7 +35,7 @@ $usernameElement = $xml->createElement('username', $username);
 $user->appendChild($usernameElement);
 
 // Create password element and append it to the user element
-$encryptedPassword = md5($password);
+$encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
 $passwordElement = $xml->createElement('password', $encryptedPassword);
 $user->appendChild($passwordElement);
 

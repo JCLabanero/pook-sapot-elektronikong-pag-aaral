@@ -2,7 +2,7 @@ $(document).ready(function () {
     // Handle form submission
     $("#registrationForm").submit(function (event) {
         event.preventDefault(); // Prevent the default form submission
-
+        
         // Get the form values
         var username = $("#username").val().toLowerCase();
         var password = $("#password").val();
@@ -18,11 +18,6 @@ $(document).ready(function () {
             alert("Invalid username. Please enter a valid username.");
             return;
         }
-
-        // if (!validatePassword(password)) {
-        //     alert("Invalid password. Please enter a valid password.");
-        //     return;
-        // }
 
         switch(validatePassword(password)){
             case 0:

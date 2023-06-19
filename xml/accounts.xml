@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <accounts>
-  <user id="648f0d515a6ed">
+  <user id="648ff66115c87">
     <username>carlo</username>
-    <password>0cef1fb10f60529028a71f58e54ed07b</password>
+    <password>$2y$10$tijjujfkclKzuFW1kdwz3.6MyNHyJvh86OZJYhXUcrrpL1YF5Am0i</password>
     <email>johncarlo.labanero.p@bulsu.edu.ph</email>
   </user>
 </accounts>
