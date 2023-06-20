@@ -7,29 +7,34 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <form action="php/accountCreate.php" class="w-25 p-3 bg-secondary">
-            <div class="mb-2">
-                <label for="email">Enter Email</label>
-                <input type="email" name="email" id="" required>
-            </div>
-            <div class="mb-2">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="" required>
-            </div>
-            <div class="mb-2">
-                <label for="password">Password</label>
-                <input type="text" name="password" id="" required>
-            </div>
-            <input type="submit" value="Create" class="btn btn-primary">
-        </form>
-    </div>
+    <h2>User List</h2>
+      <div class="table-responsive small">
+        <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+          <tbody>
+            <?php
+            // Include the account manager PHP file
+            include('../php/account_manager.php');
+            ?>
+          </tbody>
+        </table>
+      </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" 
 crossorigin="anonymous"></script>
+<script src="../js/page_navigation.js"></script>
 </html>

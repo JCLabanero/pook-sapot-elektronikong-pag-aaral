@@ -21,13 +21,14 @@ $(document).ready(function () {
 
         // Send an AJAX request to the server
         $.ajax({
-            url: "../php/login.php", // Path to your PHP login script
+            url: "php/login.php", // Path to your PHP login script
             type: "POST",
             data: data,
             success: function (response) {
                 // Handle the response from the server
                 if (response === "success") {
-                    alert("Login successful!");
+                    // alert("Login successful!");
+                    window.location.href = '../html/adminmenu.php';
                     // Redirect the user to the dashboard or perform any other necessary action
                 } else {
                     alert(response); // Display the error message received from PHP
