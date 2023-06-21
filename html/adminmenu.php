@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['user'])) {
     // Session is active
-    echo "Session is active for user: " . $_SESSION['username'];
+    echo "Session is active for user: " . $_SESSION['user'];
 } else {
     // Session is not active
     echo "Session is not active.";
@@ -23,7 +23,7 @@ if (isset($_SESSION['username'])) {
 </head>
 <body>
     <h2>User List</h2>
-    <button type="button" class="btn btn-primary" onclick="toLogout()">Logout</button>
+    <button type="button" class="btn btn-primary" onclick="toLogout()">Logout<?php session_destroy()?></button>
       <div class="table-responsive small">
         <table class="table table-striped table-sm">
             <thead>

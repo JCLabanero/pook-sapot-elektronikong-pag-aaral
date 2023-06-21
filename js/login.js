@@ -23,13 +23,17 @@ $(document).ready(function () {
         $.ajax({
             url: "php/login.php", // Path to your PHP login script
             type: "POST",
-            data: JSON.stringify(data), // Send data as a JSON object
-            contentType: "application/json", // Set the content type to JSON
+            data: data, // Send data as a JSON object
             success: function (response) {
                 // Handle the response from the server
+                // window.location.href = 'html/adminmenu.php';
+                // alert(response);
                 $.ajax({
-                    url: 'php/session_check.php',
+                    url: 'php/session_check_in.php',
                     type: 'GET',
+                    data: {
+                        user : usernameOrEmail
+                    },
                     success: function (sessionResponse) {
                         if (sessionResponse === "active") {
                             window.location.href = 'html/adminmenu.php';
