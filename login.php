@@ -26,7 +26,7 @@
                 <label class="form-check-label" for="exampleCheck1">Remember me</label>
             </div>
             <div class="mb-3">
-                <button type="Sign In" class="btn btn-primary w-100">Submit</button>
+                <button type="submit" class="btn btn-primary w-100">Sign In</button>
             </div>
         </form>
     </main>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (isset($_SESSION['username'])) {
+    // Session is active
+    echo "Session is active for user: " . $_SESSION['username'];
+} else {
+    // Session is not active
+    echo "Session is not active.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +23,7 @@
 </head>
 <body>
     <h2>User List</h2>
+    <button type="button" class="btn btn-primary" onclick="toLogout()">Logout</button>
       <div class="table-responsive small">
         <table class="table table-striped table-sm">
             <thead>

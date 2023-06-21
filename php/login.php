@@ -1,7 +1,8 @@
 <?php
+session_start();
 // Read the submitted form data
-$usernameOrEmail = $_REQUEST["usernameOrEmail"];
-$password = $_REQUEST["password"];
+$usernameOrEmail = $_POST["usernameOrEmail"];
+$password = $_POST["password"];
 
 // Your code to validate the login credentials
 // Example: Check if the username or email and password match an existing user in the XML
@@ -20,6 +21,8 @@ foreach ($xml->user as $user) {
     $existingUser = true;
     if (password_verify($password, $storedPassword)) {
       // Login successful
+      $_SESSION['username'] = $username;
+      $_SESSION['email'] = $email;
       echo "success";
       exit;
     } else {

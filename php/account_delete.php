@@ -15,8 +15,6 @@
   $query = "//user[@id='$userId']";
   $userNode = $xpath->query($query)->item(0);
 
-  var_dump($userNode);
-
   if ($userNode) {
     // Remove the user node from the DOM
     $userNode->parentNode->removeChild($userNode);

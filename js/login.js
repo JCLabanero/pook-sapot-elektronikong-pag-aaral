@@ -23,16 +23,24 @@ $(document).ready(function () {
         $.ajax({
             url: "php/login.php", // Path to your PHP login script
             type: "POST",
-            data: data,
+            data: JSON.stringify(data), // Send data as a JSON object
+            contentType: "application/json", // Set the content type to JSON
             success: function (response) {
                 // Handle the response from the server
-                if (response === "success") {
-                    // alert("Login successful!");
-                    window.location.href = '../html/adminmenu.php';
-                    // Redirect the user to the dashboard or perform any other necessary action
-                } else {
-                    alert(response); // Display the error message received from PHP
-                }
+                $.ajax({
+                    url: 'php/session_check.php',
+                    type: 'GET',
+                    success: function (sessionResponse) {
+                        if (sessionResponse === "active") {
+                            window.location.href = 'html/adminmenu.php';
+                        } else {
+                            alert("Session is not active.");
+                        }
+                    },
+                    error: function () {
+                        alert("An error occurred during session check.");
+                    }
+                });
             },
             error: function () {
                 alert("An error occurred during login.");

@@ -7,4 +7,7 @@ function toRegister(){
 function toIndex(){
     window.location.href = "index.php";
 }
+function toLogout(){
+    window.location.href = "../index.php";
+}
   
