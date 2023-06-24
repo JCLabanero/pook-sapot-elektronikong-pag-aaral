@@ -14,18 +14,12 @@ foreach ($xml->user as $user) {
   $storedPassword = $user->password;
   $id = $user["id"];
     
-  if (strcasecmp($usernameOrEmail, $username) === 0 || strcasecmp($password, $storedPassword) === 0) {
+  if (strcasecmp($usernameOrEmail, $username) === 0 || strcasecmp($password, $storedPassword) === 0 || strcasecmp($usernameOrEmail, $email) === 0) {
     $existingUser = true;
     if (password_verify($password, $storedPassword)) {
-      // Login successful
-      // echo $id;
-      session_start();
-      $_SESSION['user'] = $user;
-      $_SESSION["logged_in"] = true;
       echo "success";
       exit;
     } else {
-      // Incorrect password
       echo "Incorrect password.";
       exit;
     }
@@ -33,7 +27,6 @@ foreach ($xml->user as $user) {
 }
 
 if (!$existingUser) {
-  // User not found
   echo "User not found.";
   exit;
 }

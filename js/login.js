@@ -21,28 +21,25 @@ $(document).ready(function () {
 
         // Send an AJAX request to the server
         $.ajax({
-            url: "php/signin.php", // Path to your PHP login script
+            url: "php/login.php", // Path to your PHP login script
             type: "POST",
             data: data, // Send data as a JSON object
             success: function (response) {
                 // Handle the response from the server
-                $.ajax({
-                    url: 'php/session_create.php',
-                    type: 'GET',
-                    data: {
-                        user : usernameOrEmail
-                    },
-                    success: function (sessionResponse) {
-                        if (sessionResponse === "active") {
+                if(response==="success"){
+                    $.ajax({
+                        url: "php/session_create.php",
+                        type: "POST",
+                        data: {
+                            user : usernameOrEmail
+                        },
+                        success : function () {
                             window.location.reload();
-                        } else {
-                            alert("Session is not active.");
                         }
-                    },
-                    error: function () {
-                        alert("An error occurred during session check.");
-                    }
-                });
+                    });
+                } else {
+                    alert(response);
+                }
             },
             error: function () {
                 alert("An error occurred during login.");

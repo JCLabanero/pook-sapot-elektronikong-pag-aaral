@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true) {
+if (isset($_SESSION['user'])) {
     // Session is active
     header("Location: html/adminmenu.php");
+    exit;
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_SESSION["logged_in"]==false) {
+if (!isset($_SESSION["user"])) {
     // Session is active
     header("Location: ../index.php");
     exit;
