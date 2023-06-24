@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Read the submitted form data
 $usernameOrEmail = $_REQUEST["usernameOrEmail"];
 $password = $_REQUEST["password"];
@@ -19,8 +18,10 @@ foreach ($xml->user as $user) {
     $existingUser = true;
     if (password_verify($password, $storedPassword)) {
       // Login successful
-      // $_SESSION['id'] = $id;
       // echo $id;
+      session_start();
+      $_SESSION['user'] = $user;
+      $_SESSION["logged_in"] = true;
       echo "success";
       exit;
     } else {

@@ -21,22 +21,20 @@ $(document).ready(function () {
 
         // Send an AJAX request to the server
         $.ajax({
-            url: "php/login.php", // Path to your PHP login script
+            url: "php/signin.php", // Path to your PHP login script
             type: "POST",
             data: data, // Send data as a JSON object
             success: function (response) {
                 // Handle the response from the server
-                // window.location.href = 'html/adminmenu.php';
-                // alert(response);
                 $.ajax({
-                    url: 'php/session_check_in.php',
+                    url: 'php/session_create.php',
                     type: 'GET',
                     data: {
                         user : usernameOrEmail
                     },
                     success: function (sessionResponse) {
                         if (sessionResponse === "active") {
-                            window.location.href = 'html/adminmenu.php';
+                            window.location.reload();
                         } else {
                             alert("Session is not active.");
                         }

@@ -1,3 +1,6 @@
+<?php
+    require "php/session_check_out.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

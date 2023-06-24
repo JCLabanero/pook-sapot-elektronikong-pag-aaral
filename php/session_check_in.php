@@ -1,16 +1,10 @@
 <?php
 session_start();
 
-$user = $_GET['user'];
-$_SESSION['user'] = $user;
-
-if (isset($_SESSION['user'])) {
+if ($_SESSION["logged_in"]==false) {
     // Session is active
-    // header("Location: html/adminmenu.php");
-    // echo "Session is active for user: " . $_SESSION['username'];
-    echo "active";
+    header("Location: ../index.php");
+    exit;
 } else {
-    // Session is not active
-    echo "inactive";
 }
 ?>
