@@ -1,8 +1,8 @@
 <?php
 // Get the username and password from the AJAX request
-$username = $_POST['username'];
-$password = $_POST['password'];
-$email = $_POST['email'];
+$username = $_REQUEST['username'];
+$password = $_REQUEST['password'];
+$email = $_REQUEST['email'];
 
 // Perform any necessary validation and sanitization of input data here
 

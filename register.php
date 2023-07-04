@@ -30,7 +30,10 @@
                 <label class="form-check-label" for="exampleCheck1">Log In?</label>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+            </div>
+            <div class="mb-3 text-center">
+                <a href="login.php">Already have an account? Login</a>
             </div>
         </form>
     </main>
@@ -39,5 +42,5 @@
 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" 
 crossorigin="anonymous"></script>
-<script src="js/register.js"></script>
+<script src="js/account.js"></script>
 </html>

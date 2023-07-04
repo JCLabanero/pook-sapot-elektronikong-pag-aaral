@@ -50,13 +50,14 @@ $(document).ready(function () {
 
         // Send an AJAX request to the server
         $.ajax({
-            url: "../php/registration.php", // Path to your PHP registration script
+            url: "php/registration.php", // Path to your PHP registration script
             type: "POST",
             data: data,
             success: function (response) {
                 // Handle the response from the server
                 if (response === "success") {
                     alert("Registration successful!");
+                    window.location.href = "login.php";
                     // Redirect the user to the login page or perform any other necessary action
                 } else {
                     if (response === "Email already exists") {
@@ -65,7 +66,7 @@ $(document).ready(function () {
                     if (response === "Username already exists") {
                         $("#username").addClass("border-danger");
                     }
-                    // alert(response); // Display the error message received from PHP
+                    alert(response); // Display the error message received from PHP
                 }
             },
             error: function () {
@@ -82,7 +83,7 @@ $(document).ready(function () {
         // Regular expression to match alphanumeric characters, underscores, and hyphens
         var usernameRegex = /^[a-zA-Z0-9_-]+$/;
 
-        if (username.length < minUsernameLength || username.length > maxUsernameLength) {
+        if (username.length < minUsernameLength && username.length > maxUsernameLength) {
             return false;
         }
 
