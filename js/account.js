@@ -26,6 +26,11 @@ $(document).ready(function () {
             data: data, // Send data as a JSON object
             success: function (response) {
                 // Handle the response from the server
+                // if(response==="success"){
+                //     window.location.reload();
+                // } else {
+                //     alert(response);
+                // }
                 if(response==="success"){
                     $.ajax({
                         url: "php/session_create.php",
@@ -145,31 +150,25 @@ $(document).ready(function () {
     function validatePassword(password) {
         // Check password length
         var minPasswordLength = 8; // Minimum length for password
-
         if (password.length < minPasswordLength) {
             return 1;
         }
-
         // Check for at least one lowercase letter
         if (!/[a-z]/.test(password)) {
             return 2;
         }
-
         // Check for at least one uppercase letter
         if (!/[A-Z]/.test(password)) {
             return 3;
         }
-
         // Check for at least one digit
         if (!/[0-9]/.test(password)) {
             return 4;
         }
-
         // Check for at least one special character
         if (!/[!@#$%^&*]/.test(password)) {
             return 5;
         }
-
         return 0;
     }
 });

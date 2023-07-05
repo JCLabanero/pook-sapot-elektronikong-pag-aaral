@@ -14,7 +14,7 @@ foreach ($xml->user as $user) {
   $storedPassword = $user->password;
   $id = $user["id"];
     
-  if (strcasecmp($usernameOrEmail, $username) === 0 || strcasecmp($password, $storedPassword) === 0 || strcasecmp($usernameOrEmail, $email) === 0) {
+  if (strcasecmp($usernameOrEmail, $username) === 0 || strcasecmp($usernameOrEmail, $email) === 0) {
     $existingUser = true;
     if (password_verify($password, $storedPassword)) {
       echo "success";

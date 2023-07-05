@@ -1,5 +1,5 @@
 <?php 
-require "../includes/in_start.php"
+require "../includes/in_start.php";
 ?>
 <body class="container-fluid">
   <?php require_once("../includes/header.php");?>

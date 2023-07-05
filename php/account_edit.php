@@ -1,7 +1,7 @@
 <?php
 // Assuming you have a form that submits the user ID to be deleted
-if (isset($_POST['id'])) {
-  $userId = $_POST['id'];
+if (isset($_REQUEST['id'])) {
+  $userId = $_REQUEST['id'];
 
   // Your code to delete the user account from the XML file
   // Example: Delete the user with the matching ID from the XML file
@@ -17,23 +17,28 @@ if (isset($_POST['id'])) {
   $query = "//user[@id='$userId']";
   $userNode = $xpath->query($query)->item(0);
 
-  if ($userNode) {
-    // Remove the user node from the DOM
-    if(isset($_REQUEST["email"])) {
-        $userNode->email = $_REQUEST["email"];
+  if($userNode){
+    $message = "";
+    if(isset($_REQUEST["email"])&&!empty($_REQUEST["email"])) {
+      $userNode->getElementsByTagName('email')->item(0)->nodeValue = $_REQUEST["email"];
+      $message .= "email, ";
     }
-    if(isset($_REQUEST["username"])) {
-        $userNode->username = $_REQUEST["username"];
+    if(isset($_REQUEST["username"])&&!empty($_REQUEST["username"])) {
+      $userNode->getElementsByTagName('username')->item(0)->nodeValue = $_REQUEST["username"];
+      $message .= "username, ";
     }
-    if(isset($_REQUEST["password"])) {
-        $userNode->password = $_REQUEST["password"];
+    if(isset($_REQUEST["password"])&&!empty($_REQUEST["password"])) {
+      $password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
+      $userNode->getElementsByTagName('password')->item(0)->nodeValue = $password;
+      $message .= "password, ";
     }
     // Save the updated XML file
     $doc->save($xmlFilePath);
-    
-
+  
     // Redirect to the account manager page after deletion
-    echo "success";
+    echo $message . "updated successfully";
+  } else {
+    echo "user not found!";
     exit;
   }
 }
