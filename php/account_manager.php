@@ -7,6 +7,8 @@ foreach ($xml->user as $user) {
   $username = $user->username;
   $email = $user->email;
   $id = $user['id'];
+  if($_SESSION["id"]==$id)
+    continue;
 
   echo "<tr>";
   echo "<td>$id</td>";
