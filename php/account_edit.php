@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Assuming you have a form that submits the user ID to be updated
 if (isset($_REQUEST["id"])) {
     $userId = $_REQUEST["id"];
@@ -18,18 +19,24 @@ if (isset($_REQUEST["id"])) {
     $userNode = $xpath->query($query)->item(0);
 
     if ($userNode) {
+      $message="";
         if (isset($_REQUEST["email"]) && !empty($_REQUEST["email"])) {
             $userNode->getElementsByTagName('email')->item(0)->nodeValue = $_REQUEST["email"];
-        }
-        if (isset($_REQUEST["username"]) && !empty($_REQUEST["username"])) {
+            $message .= "email, ";
+          }
+          if (isset($_REQUEST["username"]) && !empty($_REQUEST["username"])) {
             $userNode->getElementsByTagName('username')->item(0)->nodeValue = $_REQUEST["username"];
-        }
-        if (isset($_REQUEST["password"]) && !empty($_REQUEST["password"])) {
+            $message .= "username, ";
+          }
+          if (isset($_REQUEST["password"]) && !empty($_REQUEST["password"])) {
             $password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
             $userNode->getElementsByTagName('password')->item(0)->nodeValue = $password; // Use $password instead of $_REQUEST["username"]
+            $message .= "password, ";
         }
         // Save the updated XML file
         $doc->save($xmlFilePath);
+
+        $_SESSION["success_edit_message"] = $message . " updated successfully!";
 
         // Redirect to the account manager page after updating
         $id = $userNode->getAttribute("id");

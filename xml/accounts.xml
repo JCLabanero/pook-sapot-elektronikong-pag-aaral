@@ -6,9 +6,13 @@
     <email>johncarlolabanero@gmail.com</email>
   </user>
   <user id="64a422392fb8d">
-    <username>john</username>
-    <password>$2y$10$ZNele97h5tZ6.k5g8Mxv/egrIoRm10fAtsebe8rVm7O4MCLMnFtu2</password>
+    <username>johncarlo</username>
+    <password>$2y$10$X1rRUrWnD96x28ih41/teeBjy.NLc39uA/.owJLK.JGtYceeO7d0.</password>
     <email>johncarlo.labanero.p@bulsu.edu.ph</email>
   </user>
-  
+  <user id="64a97c4fa45db">
+    <username>carlos</username>
+    <password>$2y$10$gCXG4Dy4txSoV7rKRPmReeZjvZSh5INc5A09mgRqJz8ZZfE3dr.2q</password>
+    <email>johncarlolabanero@yahoo.com</email>
+  </user>
 </accounts>
