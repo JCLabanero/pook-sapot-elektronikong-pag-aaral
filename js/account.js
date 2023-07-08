@@ -26,22 +26,8 @@ $(document).ready(function () {
             data: data, // Send data as a JSON object
             success: function (response) {
                 // Handle the response from the server
-                // if(response==="success"){
-                //     window.location.reload();
-                // } else {
-                //     alert(response);
-                // }
                 if(response==="success"){
-                    $.ajax({
-                        url: "php/session_create.php",
-                        type: "POST",
-                        data: {
-                            user : usernameOrEmail
-                        },
-                        success : function () {
-                            window.location.reload();
-                        }
-                    });
+                    window.location.reload();
                 } else {
                     alert(response);
                 }
