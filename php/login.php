@@ -21,7 +21,7 @@ foreach ($users as $user) {
         $existingUser = true;
         if (password_verify($password, $storedPassword)) {
             echo "success";
-            $_SESSION["user"] = $username;
+            $_SESSION["username"] = $username;
             $_SESSION["email"] = $email;
             $_SESSION["id"] = $id;
             exit;
