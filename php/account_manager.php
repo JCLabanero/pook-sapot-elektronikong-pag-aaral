@@ -18,4 +18,3 @@ foreach ($xml->user as $user) {
   echo "<td><a href='../php/account_delete.php?id=$id' class='btn btn-danger'><i class='bi bi-trash'></i></a></td>";
   echo "</tr>";
 }
-?>

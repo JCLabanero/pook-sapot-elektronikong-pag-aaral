@@ -36,4 +36,3 @@ if (!$existingUser) {
     echo "User not found.";
     exit;
 }
-?>

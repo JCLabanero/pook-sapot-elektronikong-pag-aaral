@@ -26,4 +26,3 @@
     header("Location: ../html/adminmenu.php");
     exit;
   }
-?>

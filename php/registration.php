@@ -55,4 +55,3 @@ $xml->save('../xml/accounts.xml'); // Replace 'accounts.xml' with the path to yo
 
 // Return a response to the JavaScript code
 echo "success";
-?>
