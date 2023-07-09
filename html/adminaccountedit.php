@@ -3,18 +3,6 @@ include_once("../includes/in_start.php");
 ?>
 
 <body class="container-fluid">
-    <header>
-        <?php
-        if (isset($_SESSION["success_edit_message"])) {
-            echo "<div class='alert alert-success text-center my-1 alert-dismissible fade show' role='alert'>";
-            echo "<i class='bi bi-check-circle me-2 h5 align-middle'></i>";
-            echo $_SESSION["success_edit_message"];
-            echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
-            echo "</div>";
-            unset($_SESSION["success_edit_message"]);
-        }
-        ?>
-    </header>
     <?php include_once("../includes/header.php"); ?>
     <main>
         <div class="py-5 text-center">

@@ -36,7 +36,7 @@ if (isset($_REQUEST["id"])) {
     // Save the updated XML file
     $doc->save($xmlFilePath);
 
-    $_SESSION["success_edit_message"] = $message . " updated successfully!";
+    $_SESSION["alert_message"] = $message . " updated successfully!";
 
     // Redirect to the account manager page after updating
     $id = $userNode->getAttribute("id");
