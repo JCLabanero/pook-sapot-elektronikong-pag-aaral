@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lessons>
+    <lesson>
+        <id>lesson1</id>
+        <title>Introduction to Java</title>
+        <content>This lesson provides an introduction to Java programming language.</content>
+    </lesson>
+    <lesson>
+        <id>lesson2</id>
+        <title>Variables and Data Types</title>
+        <content>This lesson covers variables and data types in Java.</content>
+    </lesson>
+    <lesson>
+        <id>64b171eeb12ea</id>
+        <title>john</title>
+        <content>hey</content>
+    </lesson>
+    <lesson>
+        <id>64b173481cedc</id>
+        <title>Lesson 3</title>
+        <content>hey</content>
+    </lesson>
+    <lesson>
+        <id>64b17388ea62d</id>
+        <title>lesson 6</title>
+        <content>This is the ne lesson 6 oyw</content>
+    </lesson>
+</lessons>

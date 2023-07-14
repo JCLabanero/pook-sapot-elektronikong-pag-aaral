@@ -1,4 +1,23 @@
 $(document).ready(function () {
+  $("#lessonCreateForm").submit(function (event) {
+    event.preventDefault();
+    var title = $("#lessonTitle").val();
+    var description = $("#lessonDesc").val();
+    $.ajax({
+      url: "../php/lesson_create.php",
+      type: "post",
+      data: {
+        lessonTitle: title,
+        lessonContent: description,
+      },
+      success: function (response) {
+        alert(response);
+      },
+      error: function () {
+        alert("error!");
+      },
+    });
+  });
   $("#updateAccountForm").submit(function (event) {
     event.preventDefault();
     var id = $("#id").val();
