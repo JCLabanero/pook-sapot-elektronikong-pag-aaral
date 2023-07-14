@@ -1,11 +1,5 @@
 <?php
 include_once("../includes/in_start.php");
-$email = null;
-$username = null;
-if (isset($_REQUEST["email"]))
-    $email = $_REQUEST["email"];
-if (isset($_REQUEST["username"]))
-    $username = $_REQUEST["username"];
 ?>
 
 <body class="container-fluid">
@@ -19,7 +13,7 @@ if (isset($_REQUEST["username"]))
 
         <div class="col-8 m-auto mb-3">
             <h4 class="mb-3">Information</h4>
-            <form id="edit-account" action="../php/account_update.php" method="POST" novalidate>
+            <form id="updateAccountForm" method="POST" novalidate><!--action="../php/account_update.php" -->
                 <div class="row g-3">
                     <div class="col-12">
                         <!-- id -->
@@ -30,17 +24,17 @@ if (isset($_REQUEST["username"]))
                         <div class="input-group has-validation">
                             <span class="input-group-text">@</span>
                             <!-- username -->
-                            <input type="text" name="username" class="form-control" id="username" placeholder="<?php echo $_SESSION["username"] ?>" value="<?php echo $username ?>">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="<?php echo $_SESSION["username"] ?>">
                         </div>
                     </div>
 
                     <div class="col-12">
                         <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
                         <!-- email -->
-                        <input type="email" name="email" class="form-control" id="email" placeholder="<?php echo $_SESSION["email"] ?>" value="<?php echo $email ?>">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="<?php echo $_SESSION["email"] ?>">
                     </div>
 
-                    <div class="col-12">
+                    <div class=" col-12">
                         <label for="password" class="form-label">Password</label>
                         <input type="text" name="password" class="form-control" id="password" placeholder="****">
                     </div>

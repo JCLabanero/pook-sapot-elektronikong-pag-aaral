@@ -1,7 +1,7 @@
 <header>
   <?php
   if (isset($_SESSION["alert_message"])) {
-    echo "<div class='alert alert-success text-center my-1 alert-dismissible fade show' role='alert'>";
+    echo "<div class='alert alert-success text-center my-1 alert-dismissible fade show' id='alert-box' role='alert'>";
     echo "<i class='bi bi-check-circle me-2 h5 align-middle'></i>";
     echo $_SESSION["alert_message"];
     echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";

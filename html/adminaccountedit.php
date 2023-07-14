@@ -13,7 +13,7 @@ include_once("../includes/in_start.php");
 
         <div class="col-8 m-auto mb-3">
             <h4 class="mb-3">Information</h4>
-            <form id="edit-account" action="../php/account_edit.php" method="POST" novalidate>
+            <form id="editAccountForm" method="POST" novalidate><!-- action="../php/account_edit.php" -->
                 <div class="row g-3">
                     <div class="col-12">
                         <!-- id -->
