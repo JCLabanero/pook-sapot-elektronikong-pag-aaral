@@ -11,7 +11,7 @@ $(document).ready(function () {
         lessonContent: description,
       },
       success: function (response) {
-        alert(response);
+        window.location.href = "adminlesson.php";
       },
       error: function () {
         alert("error!");

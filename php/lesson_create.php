@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Read the submitted form data
 $lessonTitle = $_POST["lessonTitle"];
 $lessonContent = $_POST["lessonContent"];
@@ -25,3 +26,4 @@ $dom->load($lessonsFile);
 $dom->save($lessonsFile);
 
 echo "Lesson created successfully.";
+$_SESSION["alert_message"] = "Lesson created successfully.";
