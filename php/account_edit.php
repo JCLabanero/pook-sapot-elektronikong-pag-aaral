@@ -28,7 +28,7 @@ if ($userNode) {
   }
   if (isset($_REQUEST["password"]) && !empty($_REQUEST["password"])) {
     $password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
-    $userNode->getElementsByTagName('password')->item(0)->nodeValue = $password; // Use $password instead of $_REQUEST["username"]
+    $userNode->getElementsByTagName('password')->item(0)->nodeValue = $password;
     $message .= "password, ";
   }
   // Save the updated XML file

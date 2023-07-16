@@ -1,5 +1,8 @@
 $(document).ready(function () {
   // Handle form submission
+  $("#alert-close").click(function () {
+    $(".alert").hide();
+  });
   $("#loginForm").submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
     // Get the form values
@@ -19,10 +22,10 @@ $(document).ready(function () {
         // Handle the response from the server
         var res = $.parseJSON(response);
         if (res.status == 200) {
-          alert(res.message);
           window.location.reload();
         } else {
-          alert(res.message);
+          $(".alert").show();
+          $(".alert-message").text(res.message);
         }
       },
       error: function () {

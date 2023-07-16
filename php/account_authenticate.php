@@ -42,7 +42,6 @@ if (!$existingUser) {
     createResponse(101, "User not found.");
     exit;
 }
-
 function createResponse($code, $message)
 {
     $response = [

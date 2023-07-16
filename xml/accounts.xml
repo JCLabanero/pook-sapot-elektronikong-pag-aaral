@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <accounts>
-  <user id="64a41bcd3162b">
-    <username>carlo</username>
-    <password>$2y$10$a3HzQ/8i5ga8Er367xTTDeqAkPUjTRTcwEgXiZKO8.ROzRz/3DxGm</password>
-    <email>johncarlolabanero@gmail.com</email>
-  </user>
-  <user id="64a422392fb8d">
-    <username>jcarlo</username>
-    <password>$2y$10$p/3vwrSzP942KQYwokrJvu1JwkKvjBTrnYTrK/oZcBdnJR7TbXlxG</password>
-    <email>johncarlo.labanero.p@bulsu.edu.ph</email>
-  </user>
   <user id="64a97c4fa45db">
     <username>caloy</username>
     <password>$2y$10$qWApTsINcPlpbT2EmdCGD.YKDA2caIxgw9lNkPScFC8Bzw4RD/6Ay</password>
     <email>johncarlolabanero@yahoo.com</email>
+  </user>
+  <user id="64b4267200805">
+    <username>carlo</username>
+    <password>$2y$10$ehbfzAjx3ZuVI1y./PKWgusSiidWllAE9N/GlhA9nS8YhYi2vAzCC</password>
+    <email>johncarlolabanero@gmail.com</email>
+  </user>
+  <user id="64b429cb4c3bf">
+    <username>jcarlo</username>
+    <password>$2y$10$EczjSFJqgXVGwi/a2z7zxeEBp2MxcLX3Osx7Ob3ObpS0JHRH4/PNm</password>
+    <email>johncarlo.labanero.p@bulsu.edu.ph</email>
   </user>
 </accounts>

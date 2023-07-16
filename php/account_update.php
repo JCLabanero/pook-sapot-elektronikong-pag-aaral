@@ -4,7 +4,7 @@ session_start();
 $userId = $_REQUEST["id"];
 $userUsername = $_REQUEST["username"];
 $userEmail = $_REQUEST["email"];
-$userPassword = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
+$userPassword = null;
 
 // Your code to update the user account in the XML file
 // Example: Update the user with the matching ID in the XML file
@@ -24,6 +24,11 @@ if (validateUsername($userUsername) !== "") {
 if (!validateEmail($userEmail)) {
     echo "Email invalid";
     exit;
+}
+if ($_REQUEST["password"] == "") {
+    $userPassword = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
+} else {
+    $userPassword = "";
 }
 
 // Check if the username or email already exists
@@ -73,12 +78,12 @@ foreach ($users as $user) {
         $usernameElement->nodeValue = ($userUsername != "") ? $userUsername : $usernameValue;
         $_SESSION["username"] = $usernameElement->nodeValue;
 
-        $passwordElement = $user->getElementsByTagName('password')->item(0);
-        $passwordElement->nodeValue = ($userPassword != "") ? $userPassword : $passwordValue;
-
         $emailElement = $user->getElementsByTagName('email')->item(0);
         $emailElement->nodeValue = ($userEmail != "") ? $userEmail : $emailValue;
         $_SESSION["email"] = $emailElement->nodeValue;
+
+        $passwordElement = $user->getElementsByTagName('password')->item(0);
+        $passwordElement->nodeValue = ($userPassword != "") ? $userPassword : $passwordValue;
 
         $xml->formatOutput = true;
         // Save the updated XML document
