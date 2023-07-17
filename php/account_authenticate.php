@@ -4,14 +4,12 @@ session_start();
 $usernameOrEmail = $_REQUEST["usernameOrEmail"];
 $password = $_REQUEST["password"];
 
-if ($usernameOrEmail == NULL || $password == NULL) {
-    if ($usernameOrEmail != NULL)
-        returnResponse(403, "Password required");
-    if ($password != NULL)
-        returnResponse(402, "Username required");
-    returnResponse(401, "Fields are required");
-    return false;
-}
+if (empty($usernameOrEmail) && empty($password))
+    echo returnRequest(400, "Fields are required", ["fields"]);
+if (empty($usernameOrEmail))
+    echo returnRequest(400, "Username required", ["username"]);
+if (empty($password))
+    echo returnRequest(400, "Password required", ["password"]);
 
 // Your code to validate the login credentials
 // Example: Check if the username or email and password match an existing user in the XML
@@ -36,18 +34,19 @@ foreach ($users as $user) {
             $_SESSION["id"] = $id;
             exit;
         } else {
-            returnResponse(102, "Password Incorrect.");
+            returnRequest(403, "Password Incorrect.");
         }
     }
 }
 if (!$existingUser) {
-    returnResponse(101, "User not found.");
+    returnRequest(404, "User not found.");
 }
-function returnResponse($code, $message)
+function returnRequest($code, $message, $missingFields = [])
 {
     $response = [
         "status" => $code,
-        "message" => "$message"
+        "message" => $message,
+        "missingFields" => $missingFields
     ];
     echo json_encode($response);
     exit;

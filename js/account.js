@@ -23,11 +23,17 @@ $(document).ready(function () {
         } else {
           $("#password,#user").removeClass("border-danger");
           $(".alert").hide().slideDown();
-          if (res.status == 101) $("#user,#password").addClass("border-danger"); //user doesn't exists
-          if (res.status == 102) $("#password").addClass("border-danger"); //wrong pass
-          if (res.status == 401) $("#user,#password").addClass("border-danger"); //blank
-          if (res.status == 402) $("#user").addClass("border-danger");
+          if (res.missingFields) {
+            if (res.missingFields.includes("username"))
+              $("#user").addClass("border-danger");
+            if (res.missingFields.includes("password"))
+              $("#password").addClass("border-danger");
+            if (res.missingFields.includes("fields"))
+              $("#password,#user").addClass("border-danger");
+          }
+          if (res.status == 404) $("#password,#user").addClass("border-danger");
           if (res.status == 403) $("#password").addClass("border-danger");
+
           $(".alert-message").text(res.message);
         }
       },
