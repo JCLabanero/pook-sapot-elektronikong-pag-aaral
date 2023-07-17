@@ -5,7 +5,11 @@ $usernameOrEmail = $_REQUEST["usernameOrEmail"];
 $password = $_REQUEST["password"];
 
 if ($usernameOrEmail == NULL || $password == NULL) {
-    createResponse(401, "The requested page needs a username and a password.");
+    if ($usernameOrEmail != NULL)
+        returnResponse(403, "Password required");
+    if ($password != NULL)
+        returnResponse(402, "Username required");
+    returnResponse(401, "Fields are required");
     return false;
 }
 
@@ -32,14 +36,20 @@ foreach ($users as $user) {
             $_SESSION["id"] = $id;
             exit;
         } else {
-            createResponse(102, "Password Incorrect.");
-            exit;
+            returnResponse(102, "Password Incorrect.");
         }
     }
 }
-
 if (!$existingUser) {
-    createResponse(101, "User not found.");
+    returnResponse(101, "User not found.");
+}
+function returnResponse($code, $message)
+{
+    $response = [
+        "status" => $code,
+        "message" => "$message"
+    ];
+    echo json_encode($response);
     exit;
 }
 function createResponse($code, $message)

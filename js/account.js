@@ -24,7 +24,13 @@ $(document).ready(function () {
         if (res.status == 200) {
           window.location.reload();
         } else {
-          $(".alert").show();
+          $("#password,#user").removeClass("border-danger");
+          $(".alert").hide().slideDown();
+          if (res.status == 101) $("#user,#password").addClass("border-danger");
+          if (res.status == 102) $("#password").addClass("border-danger");
+          if (res.status == 401) $("#user,#password").addClass("border-danger");
+          if (res.status == 402) $("#user").addClass("border-danger");
+          if (res.status == 403) $("#password").addClass("border-danger");
           $(".alert-message").text(res.message);
         }
       },
