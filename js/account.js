@@ -26,9 +26,9 @@ $(document).ready(function () {
         } else {
           $("#password,#user").removeClass("border-danger");
           $(".alert").hide().slideDown();
-          if (res.status == 101) $("#user,#password").addClass("border-danger");
-          if (res.status == 102) $("#password").addClass("border-danger");
-          if (res.status == 401) $("#user,#password").addClass("border-danger");
+          if (res.status == 101) $("#user,#password").addClass("border-danger"); //user doesn't exists
+          if (res.status == 102) $("#password").addClass("border-danger"); //wrong pass
+          if (res.status == 401) $("#user,#password").addClass("border-danger"); //blank
           if (res.status == 402) $("#user").addClass("border-danger");
           if (res.status == 403) $("#password").addClass("border-danger");
           $(".alert-message").text(res.message);
@@ -43,74 +43,69 @@ $(document).ready(function () {
   $("#registrationForm").submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // Get the form values
-    var username = $("#username").val().toLowerCase();
-    var password = $("#password").val();
-    var email = $("#email").val();
-
     // Perform validation
-    if (username === "" || password === "" || email === "") {
-      alert("Please fill in all fields.");
-      return;
-    }
+    // if (username === "" || password === "" || email === "") {
+    //   alert("Please fill in all fields.");
+    //   return;
+    // }
 
-    if (!validateUsername(username)) {
-      alert("Invalid username. Please enter a valid username.");
-      return;
-    }
+    // if (!validateUsername(username)) {
+    //   alert("Invalid username. Please enter a valid username.");
+    //   return;
+    // }
 
-    switch (validatePassword(password)) {
-      case 0:
-        break;
-      case 1:
-        alert("Passord too short");
-        return;
-      case 2:
-        alert("Include atleast one lowercase");
-        return;
-      case 3:
-        alert("Include atleast one uppercase");
-        return;
-      case 4:
-        alert("Include atleast one digit");
-        return;
-      case 5:
-        alert("Include atleast one special character");
-        return;
-      default:
-        alert("Error");
-    }
+    // switch (validatePassword(password)) {
+    //   case 0:
+    //     break;
+    //   case 1:
+    //     alert("Passord too short");
+    //     return;
+    //   case 2:
+    //     alert("Include atleast one lowercase");
+    //     return;
+    //   case 3:
+    //     alert("Include atleast one uppercase");
+    //     return;
+    //   case 4:
+    //     alert("Include atleast one digit");
+    //     return;
+    //   case 5:
+    //     alert("Include atleast one special character");
+    //     return;
+    //   default:
+    //     alert("Error");
+    // }
 
+    // Get the form values
     // Create a data object to send to the server
     var data = {
-      username: username,
-      password: password,
-      email: email,
+      username: $("#username").val().toLowerCase(),
+      password: $("#password").val(),
+      email: $("#email").val(),
     };
-
     // Send an AJAX request to the server
     $.ajax({
-      url: "php/registration.php", // Path to your PHP registration script
+      url: "php/account_create.php",
       type: "POST",
       data: data,
       success: function (response) {
-        // Handle the response from the server
-        if (response === "success") {
-          alert("Registration successful!");
+        var res = $.parseJSON(response);
+        if (res.status == 200) {
           window.location.href = "login.php";
-          // Redirect the user to the login page or perform any other necessary action
         } else {
-          if (response === "Email already exists") {
-            $("#email").addClass("border-danger");
+          $(".alert").hide().slideDown("fast");
+          $(".form-control").removeClass("border-danger"); // Remove border-danger from all fields
+          if (res.missingFields) {
+            res.missingFields.forEach(function (field) {
+              $("#" + field).addClass("border-danger"); // Add border-danger class to the missing fields
+            });
           }
-          if (response === "Username already exists") {
-            $("#username").addClass("border-danger");
-          }
-          alert(response); // Display the error message received from PHP
+          $(".alert-message").text(res.message);
         }
       },
-      error: function () {
-        alert("An error occurred during registration.");
+      error: function (xhr, status, error) {
+        // Handle the AJAX error if needed
+        console.log("Error:", error);
       },
     });
   });
