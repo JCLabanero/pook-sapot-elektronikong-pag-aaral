@@ -6,18 +6,15 @@ $(document).ready(function () {
   $("#loginForm").submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
     // Get the form values
-    // var form = $("#loginForm")[0];
-    // var formData = new FormData(form);
     var formData = {
       usernameOrEmail: $("#user").val(),
       password: $("#password").val(),
     };
     // Send an AJAX request to the server
     $.ajax({
-      url: "php/account_authenticate.php", // Path to your PHP login script
+      url: "php/account_authenticate.php",
       type: "POST",
       data: formData, // Send data as a JSON object
-      //   processData: false,
       success: function (response) {
         // Handle the response from the server
         var res = $.parseJSON(response);
@@ -43,39 +40,6 @@ $(document).ready(function () {
   $("#registrationForm").submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // Perform validation
-    // if (username === "" || password === "" || email === "") {
-    //   alert("Please fill in all fields.");
-    //   return;
-    // }
-
-    // if (!validateUsername(username)) {
-    //   alert("Invalid username. Please enter a valid username.");
-    //   return;
-    // }
-
-    // switch (validatePassword(password)) {
-    //   case 0:
-    //     break;
-    //   case 1:
-    //     alert("Passord too short");
-    //     return;
-    //   case 2:
-    //     alert("Include atleast one lowercase");
-    //     return;
-    //   case 3:
-    //     alert("Include atleast one uppercase");
-    //     return;
-    //   case 4:
-    //     alert("Include atleast one digit");
-    //     return;
-    //   case 5:
-    //     alert("Include atleast one special character");
-    //     return;
-    //   default:
-    //     alert("Error");
-    // }
-
     // Get the form values
     // Create a data object to send to the server
     var data = {
@@ -90,10 +54,19 @@ $(document).ready(function () {
       data: data,
       success: function (response) {
         var res = $.parseJSON(response);
+        $(".alert-link").hide();
         if (res.status == 200) {
-          window.location.href = "login.php";
+          $(".form-control").removeClass("border-danger");
+          $(".alert")
+            .hide()
+            .slideDown("fast")
+            .removeClass("alert-warning")
+            .addClass("alert-success");
+          $(".alert-link").show();
+          $(".alert-message").text(res.message);
+          // window.location.href = "login.php";
         } else {
-          $(".alert").hide().slideDown("fast");
+          $(".alert").hide().slideDown("fast").removeClass("alert-success");
           $(".form-control").removeClass("border-danger"); // Remove border-danger from all fields
           if (res.missingFields) {
             res.missingFields.forEach(function (field) {
@@ -109,52 +82,4 @@ $(document).ready(function () {
       },
     });
   });
-
-  // Validate username
-  function validateUsername(username) {
-    var minUsernameLength = 3; // Minimum length for username
-    var maxUsernameLength = 20; // Maximum length for username
-
-    // Regular expression to match alphanumeric characters, underscores, and hyphens
-    var usernameRegex = /^[a-zA-Z0-9_-]+$/;
-
-    if (
-      username.length < minUsernameLength &&
-      username.length > maxUsernameLength
-    ) {
-      return false;
-    }
-
-    if (!username.match(usernameRegex)) {
-      return false;
-    }
-
-    return true;
-  }
-
-  // Validate password
-  function validatePassword(password) {
-    // Check password length
-    var minPasswordLength = 8; // Minimum length for password
-    if (password.length < minPasswordLength) {
-      return 1;
-    }
-    // Check for at least one lowercase letter
-    if (!/[a-z]/.test(password)) {
-      return 2;
-    }
-    // Check for at least one uppercase letter
-    if (!/[A-Z]/.test(password)) {
-      return 3;
-    }
-    // Check for at least one digit
-    if (!/[0-9]/.test(password)) {
-      return 4;
-    }
-    // Check for at least one special character
-    if (!/[!@#$%^&*]/.test(password)) {
-      return 5;
-    }
-    return 0;
-  }
 });

@@ -9,7 +9,7 @@ require "php/session_check_out.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -19,7 +19,9 @@ require "php/session_check_out.php";
             <h1 class="mb-3">Sign Up</h1>
             <div class="mb-3 form-floating">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
-                    <p class="alert-message my-auto">You should check in on some of those fields below.</p>
+                    <i class="bi bi-check-circle"></i>
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <p class="alert-message my-auto">You should check in on some of those fields below.</p><a href="login.php" class="alert-link" style="display: none;">click here</a>
                     <button type="button" class="btn-close" id="alert-close"></button>
                 </div>
             </div>

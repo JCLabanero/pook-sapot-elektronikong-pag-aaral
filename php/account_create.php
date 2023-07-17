@@ -16,16 +16,19 @@ foreach ($data as $key => $value) {
 if (!empty($missingFields)) {
   returnRequest(400, "Fields are required.", $missingFields);
 }
-// Perform any necessary validation and sanitization of input data here
-// if (empty($username) || empty($password) || empty($email)) {
-//   if (empty($email) && empty($username)) echo returnRequest(404, "Password required");
-//   if (empty($email) && empty($password)) echo returnRequest(405, "Username required");
-//   if (empty($username) && empty($password)) echo returnRequest(406, "Email required");
-//   if (empty($email)) echo returnRequest(401, "Username and password are required");
-//   if (empty($username)) echo returnRequest(402, "Email and password are required.");
-//   if (empty($password)) echo returnRequest(403, "Username and email are requried");
-//   echo returnRequest(400, "Fields are required.");
-// }
+$error = validateUsername($data['username']);
+if (!empty($error)) {
+  returnRequest(403, $error, ['username']);
+}
+$error = validateEmail($data['email']);
+if (!empty($error)) {
+  returnRequest(403, $error, ['email']);
+}
+$error = validatePassword($data['password']);
+if (!empty($error)) {
+  returnRequest(403, $error, ['password']);
+}
+
 // Load the XML file
 $xml = new DOMDocument();
 $xml->preserveWhiteSpace = false;
@@ -36,13 +39,11 @@ $existingUser = $xml->getElementsByTagName('user');
 foreach ($existingUser as $user) {
   $existingUsername = $user->getElementsByTagName('username')->item(0)->nodeValue;
   $existingEmail = $user->getElementsByTagName('email')->item(0)->nodeValue;
-  if ($existingEmail === $email) {
-    echo "Email already exists";
-    exit;
+  if ($existingEmail === $data['email']) {
+    returnRequest(403, "Email already exists", ['email']);
   }
-  if ($existingUsername === $username) {
-    echo "Username already exists";
-    exit;
+  if ($existingUsername === $data['username']) {
+    returnRequest(403, "Username already exists", ['email']);
   }
 }
 
@@ -74,7 +75,7 @@ $xml->save('../xml/accounts.xml'); // Replace 'accounts.xml' with the path to yo
 // file_put_contents('../xml/accounts.xml',$formattedXML);
 
 // Return a response to the JavaScript code
-echo "success";
+echo returnRequest(200, "Registration success, to login ");
 
 function returnRequest($code, $message, $missingFields = [])
 {
@@ -85,4 +86,56 @@ function returnRequest($code, $message, $missingFields = [])
   ];
   echo json_encode($response);
   exit;
+}
+
+function validateUsername($username)
+{
+  $error = null;
+  $minUsernameLength = 3; // Minimum length for username
+  $maxUsernameLength = 20; // Maximum length for username
+  // Regular expression to match alphanumeric characters, underscores, and hyphens
+  $usernameRegex = '/^[a-zA-Z0-9_\-\s]+$/';
+  if (strlen($username) < $minUsernameLength || strlen($username) > $maxUsernameLength) {
+    $error = "Username length must be 3-20";
+  }
+  if (!preg_match($usernameRegex, $username)) {
+    $error = "Special characters are limited";
+  }
+  return $error;
+}
+function validateEmail($email)
+{
+  $error = null;
+  // Regular expression pattern for email validation
+  $pattern = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+  // Use preg_match to perform the validation
+  if (!preg_match($pattern, $email)) {
+    $error = "Email is invalid"; // Email is invalid
+  }
+  return $error;
+}
+function validatePassword($password)
+{
+  $error = null;
+  // Password length must be 8 or more characters
+  if (strlen($password) < 8) {
+    $error = "Password length must be 8 or more characters";
+  }
+  // Check if the password contains at least one uppercase letter
+  if (!preg_match('/[A-Z]/', $password)) {
+    $error = "Password must contain at least one uppercase letter";
+  }
+  // Check if the password contains at least one lowercase letter
+  if (!preg_match('/[a-z]/', $password)) {
+    $error = "Password must contain at least one lowercase letter";
+  }
+  // Check if the password contains at least one digit
+  if (!preg_match('/\d/', $password)) {
+    $error = "Password must contain at least one digit";
+  }
+  // Check if the password contains at least one special character
+  if (!preg_match('/[^A-Za-z0-9]/', $password)) {
+    $error = "Password must contain at least one special character";
+  }
+  return $error;
 }
