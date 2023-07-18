@@ -1,34 +1,6 @@
-<?php
-require "php/session_check_out.php";
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<?php include_once("includes/start_out.php"); ?>
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
-
-    <!-- //Modal
-    <div class="modal fade" style="align-items: center;" id="modalAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fs-5" id="exampleModalLabel">Authentication error</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalText">
-                    ...
-                </div>
-            </div>
-        </div>
-    </div> -->
     <main class="w-100 m-auto">
         <form id="loginForm" name="loginForm" method="post" class=" m-auto p-3 rounded" style="max-width: 350px;">
             <h1 class="mb-3">Sign In</h1>
@@ -59,8 +31,4 @@ require "php/session_check_out.php";
         </form>
     </main>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script src="js/account.js"></script>
-
-</html>
+<?php include_once("includes/end_out.php"); ?>

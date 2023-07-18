@@ -1,5 +1,5 @@
 <?php
-include_once("../includes/in_start.php");
+include_once("../includes/start_in.php");
 ?>
 
 <body>
@@ -27,5 +27,5 @@ include_once("../includes/in_start.php");
 </body>
 
 <?php
-include_once("../includes/in_end.php");
+include_once("../includes/end_in.php");
 ?>

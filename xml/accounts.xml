@@ -15,4 +15,9 @@
     <password>$2y$10$g9xNPGQaTcLaSh4JFH2OI.1voDuoTCL8GaLYTIGHfJgSFFc9gbtmW</password>
     <email>johncarlolabanero@gmail.com</email>
   </user>
+  <user id="64b69a32de567">
+    <username>jcarlo2</username>
+    <password>$2y$10$QqRPecAH6fz6maaKAiLwQeBOwIb.aEnF8MXTTS9FIFVvrz/cIrosC</password>
+    <email>admin@test.com</email>
+  </user>
 </accounts>

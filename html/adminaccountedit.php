@@ -1,5 +1,5 @@
 <?php
-include_once("../includes/in_start.php");
+include_once("../includes/start_in.php");
 ?>
 
 <body class="container-fluid">
@@ -49,4 +49,4 @@ include_once("../includes/in_start.php");
 
     </footer>
 </body>
-<?php include "../includes/in_end.php" ?>
+<?php include "../includes/end_in.php" ?>
