@@ -1,14 +1,18 @@
 <header>
   <?php
-  if (isset($_SESSION["alert_message"])) {
-    echo "<div class='alert alert-success text-center my-1 alert-dismissible fade show' id='alert-box' role='alert'>";
-    echo "<i class='bi bi-check-circle me-2 h5 align-middle'></i>";
-    echo $_SESSION["alert_message"];
-    echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
-    echo "</div>";
-    unset($_SESSION["alert_message"]);
-  }
+  // if (isset($_SESSION["alert_message"])) {
+  //   echo "<div class='alert alert-success text-center my-1 alert-dismissible fade show' id='alert-box' role='alert'>";
+  //   echo "<i class='bi bi-check-circle me-2 h5 align-middle'></i>";
+  //   echo $_SESSION["alert_message"];
+  //   echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
+  //   echo "</div>";
+  //   unset($_SESSION["alert_message"]);
+  // }
   ?>
+  <div class="my-2 alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
+    <p class="alert-message my-auto">You should check in on some of those fields below.</p>
+    <button type="button" class="btn-close" id="alert-close"></button>
+  </div>
   <div class='d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mb-3'>
     <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
       <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">

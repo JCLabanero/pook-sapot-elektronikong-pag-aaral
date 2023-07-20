@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  $(".btn-close").click(function () {
+    $(".alert").hide();
+  });
   $("#lessonCreateForm").submit(function (event) {
     event.preventDefault();
     var title = $("#lessonTitle").val();
@@ -88,6 +91,23 @@ $(document).ready(function () {
 
     // Call the toAccountEdit function with the data
     toAccountEdit(id, username, email);
+  });
+
+  $(document).on("click", "button.btn-danger", function () {
+    // Get the data attributes from the button
+    var id = $(this).data("id");
+    $.ajax({
+      url: "../php/account_delete.php",
+      type: "POST",
+      data: { id: id },
+      success: function (response) {
+        var res = $.parseJSON(response);
+        if (res.status == 200) {
+          $(".alert").hide().slideDown();
+        }
+        $(".alert-message").text(res.message);
+      },
+    });
   });
 
   // Your toAccountEdit function
