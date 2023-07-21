@@ -52,11 +52,13 @@ $(document).ready(function () {
   });
   $("#editAccountForm").submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
-
+    var form = $(this);
+    var username = $("#username").val();
+    var email = $("#email").val();
     data = {
       id: $("#id").val(),
-      username: $("#username").val(),
-      email: $("#email").val(),
+      username: username,
+      email: email,
       password: $("#password").val(),
     };
 
@@ -66,12 +68,21 @@ $(document).ready(function () {
       data: data, // Send data as a JSON object
       success: function (response) {
         var res = $.parseJSON(response);
-        if (res.status == 200) {
-          $(".alert").hide().slideDown();
-        }
+        $(".form-control").removeClass("border-danger border-success");
         if (res.updatedFields) {
           res.updatedFields.forEach((element) => {
             $("#" + element).addClass("border-success");
+          });
+        }
+        if (res.status == 200) {
+          $(".alert").hide().slideDown();
+          form[0].reset();
+          $("#username").attr("placeholder", username);
+          $("#email").attr("placeholder", email);
+        }
+        if (res.errorFields) {
+          res.errorFields.forEach((element) => {
+            $("#" + element).addClass("border-danger");
           });
         }
         $(".alert").hide().slideDown();
@@ -82,18 +93,15 @@ $(document).ready(function () {
       },
     });
   });
+
   // Event delegation to handle click events on buttons with the 'btn-danger' class
   $(document).on("click", "button.btn-success", function () {
     // Get the data attributes from the button
     var id = $(this).data("id");
-    var username = $(this).data("username");
-    var email = $(this).data("email");
 
     // Call the toAccountEdit function with the data
     var url = "adminaccountedit.php?";
     url += "id=" + encodeURIComponent(id);
-    url += "&username=" + encodeURIComponent(username);
-    url += "&email=" + encodeURIComponent(email);
 
     window.location.href = url;
   });

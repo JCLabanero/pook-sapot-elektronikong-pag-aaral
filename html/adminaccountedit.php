@@ -30,12 +30,12 @@ $id = $_REQUEST["id"];
                         <label for="username" class="form-label">Username</label>
                         <div class="input-group">
                             <!-- <span class="input-group-text username">@</span> -->
-                            <input type="text" name="username" class="form-control username" id="username" placeholder="<?php echo $username; ?>">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="<?php echo $username; ?>">
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" id="email" placeholder="<?php echo $email ?>">
                     </div>
 

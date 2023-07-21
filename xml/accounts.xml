@@ -5,11 +5,14 @@
     <password>$2y$10$qWApTsINcPlpbT2EmdCGD.YKDA2caIxgw9lNkPScFC8Bzw4RD/6Ay</password>
     <email>johncarlolabanero@yahoo.com</email>
   </user>
-  
-  
   <user id="64b69a32de567">
     <username>jcarlo2</username>
     <password>$2y$10$QqRPecAH6fz6maaKAiLwQeBOwIb.aEnF8MXTTS9FIFVvrz/cIrosC</password>
     <email>admin@test.com</email>
+  </user>
+  <user id="64ba9fbfafd82">
+    <username>carlo</username>
+    <password>$2y$10$g3/kV/SH2ReTcL3qwEmaxewTc0F4gW5XbRquAMiWgeX0Nz989VKaq</password>
+    <email>johncarlolabanero@gmail.com</email>
   </user>
 </accounts>
