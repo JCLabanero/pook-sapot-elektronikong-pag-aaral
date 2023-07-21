@@ -40,7 +40,7 @@ $(document).ready(function () {
       data: data,
       success: function (response) {
         if (response == "success") {
-          window.location.reload();
+          $(".alert").hide().slideDown();
         } else {
           alert(response);
         }
@@ -52,30 +52,30 @@ $(document).ready(function () {
   });
   $("#editAccountForm").submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
-    var id = $("#id").val();
-    var username = $("#username").val();
-    var email = $("email").val();
-    var password = $("password").val();
 
     data = {
-      id: id,
-      username: username,
-      email: email,
-      password: password,
+      id: $("#id").val(),
+      username: $("#username").val(),
+      email: $("#email").val(),
+      password: $("#password").val(),
     };
 
     $.ajax({
       url: "../php/account_edit.php", // Path to your PHP login script
       type: "POST",
       data: data, // Send data as a JSON object
-      dataType: "json",
       success: function (response) {
-        // Handle the response from the server
-        if (response.status === "success") {
-          window.location.href = response.href;
-        } else {
-          alert(response);
+        var res = $.parseJSON(response);
+        if (res.status == 200) {
+          $(".alert").hide().slideDown();
         }
+        if (res.updatedFields) {
+          res.updatedFields.forEach((element) => {
+            $("#" + element).addClass("border-success");
+          });
+        }
+        $(".alert").hide().slideDown();
+        $(".alert-message").text(res.message);
       },
       error: function () {
         alert("An error occurred during login.");
@@ -90,7 +90,12 @@ $(document).ready(function () {
     var email = $(this).data("email");
 
     // Call the toAccountEdit function with the data
-    toAccountEdit(id, username, email);
+    var url = "adminaccountedit.php?";
+    url += "id=" + encodeURIComponent(id);
+    url += "&username=" + encodeURIComponent(username);
+    url += "&email=" + encodeURIComponent(email);
+
+    window.location.href = url;
   });
 
   $(document).on("click", "button.btn-danger", function () {
@@ -109,15 +114,4 @@ $(document).ready(function () {
       },
     });
   });
-
-  // Your toAccountEdit function
-  function toAccountEdit(id, username, email) {
-    // Replace this with your custom logic
-    var url = "adminaccountedit.php?";
-    url += "id=" + encodeURIComponent(id);
-    url += "&username=" + encodeURIComponent(username);
-    url += "&email=" + encodeURIComponent(email);
-
-    window.location.href = url;
-  }
 });
