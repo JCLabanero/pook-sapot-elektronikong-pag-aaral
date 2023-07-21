@@ -23,6 +23,7 @@ $(document).ready(function () {
   });
   $("#updateAccountForm").submit(function (event) {
     event.preventDefault();
+    var form = $(this)[0];
     var id = $("#id").val();
     var username = $("#username").val();
     var email = $("#email").val();
@@ -39,11 +40,27 @@ $(document).ready(function () {
       type: "POST",
       data: data,
       success: function (response) {
-        if (response == "success") {
-          $(".alert").hide().slideDown();
-        } else {
-          alert(response);
+        var res = $.parseJSON(response);
+        $(".form-control").removeClass("border-success border-danger");
+        if (res.successFields) {
+          res.successFields.forEach((element) => {
+            $("#" + element).addClass("border-success");
+          });
         }
+        if (res.status == 200) {
+          $(".alert").hide().slideDown();
+          $("#username").attr("placeholder", username);
+          $("#email").attr("placeholder", email);
+          form.reset();
+        } else {
+          $(".alert").hide().slideDown();
+        }
+        if (res.errorFields) {
+          res.errorFields.forEach((element) => {
+            $("#" + element).addClass("border-danger");
+          });
+        }
+        $(".alert-message").text(res.message);
       },
       error: function () {
         alert("error within file");

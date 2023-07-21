@@ -1,10 +1,35 @@
 <?php
 session_start();
 // Assuming you have a form that submits the user ID to be updated
-$userId = $_REQUEST["id"];
-$userUsername = $_REQUEST["username"];
-$userEmail = $_REQUEST["email"];
-$userPassword = null;
+// $data["id] = $_REQUEST["id"];
+// $data["username"] = $_REQUEST["username"];
+// $data["email"] = $_REQUEST["email"];
+// $userPassword = null;
+
+$data = array(
+    "id" => $_REQUEST["id"],
+    "username" => $_REQUEST["username"],
+    "email" => $_REQUEST["email"],
+    "password" => $_REQUEST["password"],
+);
+$errorFields = [];
+$successFields = [];
+
+foreach ($data as $key => $value) {
+    if (empty($value))
+        $errorFields[] = $key;
+}
+
+if (!empty($errorFields))
+    returnRequest(400, "Fields are required.", [], $errorFields);
+
+if (!empty(validateUsername($data["username"]))) {
+    returnRequest(400, validateUsername($data["username"]));
+}
+//Check if email is valid
+if (!validateEmail($data["email"])) {
+    returnRequest(400, "Invalid Email");
+}
 
 // Your code to update the user account in the XML file
 // Example: Update the user with the matching ID in the XML file
@@ -16,82 +41,57 @@ $xml->preserveWhiteSpace = false;
 $xml->load($xmlFilePath); // Replace 'accounts.xml' with the path to your XML file
 
 //Check if username is valid
-if (validateUsername($userUsername) !== "") {
-    echo validateUsername($userUsername);
-    exit;
-}
-//Check if email is valid
-if (!validateEmail($userEmail)) {
-    echo "Email invalid";
-    exit;
-}
-if ($_REQUEST["password"] == "") {
-    $userPassword = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
-} else {
-    $userPassword = "";
-}
 
 // Check if the username or email already exists
 $users = $xml->getElementsByTagName("user");
 foreach ($users as $user) {
-    $existingUsername = $user->getElementsByTagName('username')->item(0)->nodeValue;
-    $existingEmail = $user->getElementsByTagName('email')->item(0)->nodeValue;
-    $existingId = $user->getAttribute('id');
-    if ($existingId === $userId)
+    $username = $user->getElementsByTagName('username')->item(0)->nodeValue;
+    $email = $user->getElementsByTagName('email')->item(0)->nodeValue;
+    $id = $user->getAttribute('id');
+    if ($id == $data["id"])
         continue;
-    if ($existingUsername === $userUsername && $userUsername != "") {
-        echo "Username already exists";
-        exit;
-    }
-    if ($existingEmail === $userEmail && $userEmail != "") {
-        echo "Email already exists";
-        exit;
-    }
+    if (strcasecmp($username, $data["username"]) === 0)
+        $errorFields[] = "username";
+    if (strcasecmp($email, $data["email"]) === 0)
+        $errorFields[] = "email";
+    if (!empty($errorFields))
+        returnRequest(400, "Field(s) already exists.", [], $errorFields);
 }
 
 // Loop through the user elements to find the one with the matching ID
 foreach ($users as $user) {
-    $idAttribute = $user->getAttribute('id');
+    $id = $user->getAttribute('id');
 
-    if ($idAttribute === $userId) {
+    if ($id === $data["id"]) {
         // Update the desired data within the user element
-        $usernameValue = $user->getElementsByTagName('username')->item(0)->nodeValue;
-        $emailValue = $user->getElementsByTagName('email')->item(0)->nodeValue;
-        $passwordValue = $user->getElementsByTagName('password')->item(0)->nodeValue;
+        $username = $user->getElementsByTagName('username')->item(0)->nodeValue;
+        $email = $user->getElementsByTagName('email')->item(0)->nodeValue;
+        $password = $user->getElementsByTagName('password')->item(0)->nodeValue;
 
-        if (strcasecmp($userUsername, $usernameValue) === 0) {
-            echo "Username identical";
-            exit;
-        }
-        if (strcasecmp($userEmail, $emailValue) === 0 && $userEmail != "") {
-            echo "Email identical";
-            exit;
-        }
-        if ($userPassword !== "") {
-            if (password_verify($userPassword, $passwordValue)) {
-                echo "Password identical";
-                exit;
-            }
-        }
+        if (strcasecmp($data["username"], $username) === 0)
+            $errorFields[] = "username";
+        if (strcasecmp($data["email"], $email) === 0 && $data["email"] != "")
+            $errorFields[] = "email";
+        if (password_verify($data["password"], $password))
+            $errorFields[] = "password";
+        if (!empty($errorFields))
+            returnRequest(400, "Field(s) are identical.", [], $errorFields);
 
         $usernameElement = $user->getElementsByTagName('username')->item(0);
-        $usernameElement->nodeValue = ($userUsername != "") ? $userUsername : $usernameValue;
-        $_SESSION["username"] = $usernameElement->nodeValue;
-
+        $usernameElement->nodeValue = $data["username"];
         $emailElement = $user->getElementsByTagName('email')->item(0);
-        $emailElement->nodeValue = ($userEmail != "") ? $userEmail : $emailValue;
+        $emailElement->nodeValue = $data["email"];
+
+        $_SESSION["username"] = $usernameElement->nodeValue;
         $_SESSION["email"] = $emailElement->nodeValue;
 
         $passwordElement = $user->getElementsByTagName('password')->item(0);
-        $passwordElement->nodeValue = ($userPassword != "") ? $userPassword : $passwordValue;
+        $passwordElement->nodeValue = password_hash($data["password"], PASSWORD_DEFAULT);
 
         $xml->formatOutput = true;
         // Save the updated XML document
         $xml->save($xmlFilePath);
-        $_SESSION["alert_message"] = "Account updated successfully";
-        $response = "success";
-        echo $response;
-        exit; // Exit the loop since the user has been found
+        returnRequest(200, "Account updated successfully.");
     }
 }
 function validateEmail($email)
@@ -103,28 +103,37 @@ function validateEmail($email)
     if (preg_match($pattern, $email)) {
         return true; // Email is valid
     }
-    if ($email == "")
-        return true;
     return false;
 }
 function validateUsername($username)
 {
+    $return = null;
     $minUsernameLength = 3; // Minimum length for username
     $maxUsernameLength = 20; // Maximum length for username
 
     // Regular expression to match alphanumeric characters, underscores, and hyphens
     $usernameRegex = '/^[a-zA-Z0-9_-]+$/';
-    if ($username == "")
-        return "";
 
     if (strlen($username) < $minUsernameLength || strlen($username) > $maxUsernameLength) {
-        return "Username invalid: length must be 3-20 characters";
+        $return = "Username invalid: length must be 3-20 characters";
     }
 
     if (!preg_match($usernameRegex, $username)) {
-        return "Username invalid: is limited with special characters";
+        $return = "Username invalid: is limited with special characters";
     }
 
 
-    return "";
+    return $return;
+}
+
+function returnRequest($code, $message, $successFields = [], $errorFields = [])
+{
+    $response = [
+        "status" => $code,
+        "message" => $message,
+        "successFields" => $successFields,
+        "errorFields" => $errorFields,
+    ];
+    echo json_encode($response);
+    exit;
 }

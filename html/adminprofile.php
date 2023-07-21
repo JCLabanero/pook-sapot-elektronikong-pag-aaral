@@ -6,7 +6,7 @@ include_once("../includes/start_in.php");
     <?php include_once("../includes/header.php"); ?>
     <main>
         <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+            <!-- <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
             <h2><?php echo $_SESSION["username"] ?></h2>
             <p class="lead"> Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
         </div>
@@ -22,7 +22,7 @@ include_once("../includes/start_in.php");
                     <div class="col-12">
                         <label for="username" class="form-label">Username</label>
                         <div class="input-group has-validation">
-                            <span class="input-group-text">@</span>
+                            <!-- <span class="input-group-text">@</span> -->
                             <!-- username -->
                             <input type="text" name="username" class="form-control" id="username" placeholder="<?php echo $_SESSION["username"] ?>">
                         </div>
