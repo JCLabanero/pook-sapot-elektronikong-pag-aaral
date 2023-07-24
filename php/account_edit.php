@@ -63,7 +63,8 @@ foreach ($users as $user) {
       if (password_verify($data["password"], $password)) {
         $errorFields[] = "password";
       }
-      $user->getElementsByTagName('password')->item(0)->nodeValue = password_hash($data["email"], PASSWORD_DEFAULT);
+      $newPass = password_hash($data["password"], PASSWORD_DEFAULT);
+      $user->getElementsByTagName('password')->item(0)->nodeValue = $newPass;
       $updatedFields[] = "password";
     }
     if (!empty($errorFields))
