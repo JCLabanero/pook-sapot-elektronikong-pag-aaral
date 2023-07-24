@@ -31,7 +31,7 @@ include_once("../includes/start_in.php");
                                     <?php echo $content ?>
                                 </div>
                                 <div class="accordion-footer d-flex justify-content-end m-1">
-                                    <button data-id="<?php echo $id ?>" class="btn-primary btn mx-1 lesson-edit">Edit</button>
+                                    <button data-id="<?php echo $id ?>" class="btn-primary btn mx-1 lesson-update">Edit</button>
                                     <button data-id="<?php echo $id ?>" class="btn-danger btn mx-1 lesson-delete">Delete</button>
                                 </div>
                             </div>

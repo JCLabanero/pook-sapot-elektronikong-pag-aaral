@@ -2,15 +2,41 @@ $(document).ready(function () {
   $(".btn-close").click(function () {
     $(".alert").hide();
   });
+  $("#lessonUpdateForm").submit(function (event) {
+    event.preventDefault();
+    var form = $(this)[0];
+    $.ajax({
+      url: "../php/lesson_update.php",
+      type: "POST",
+      data: {
+        id: $("input[name='id']").val(),
+        title: $("#title").val(),
+        content: $("#content").val(),
+      },
+      success: function (response) {
+        var res = $.parseJSON(response);
+        $(".form-control").removeClass("border-success border-danger");
+        if (res.status == 200) {
+          if (res.fields) {
+            res.fields.forEach((element) => {
+              $("#" + element).addClass("border-success");
+            });
+          }
+        }
+        $(".alert").hide().slideDown();
+        $(".alert-message").text(res.message);
+      },
+    });
+  });
   $("#lessonCreateForm").submit(function (event) {
     event.preventDefault();
-    var title = $("#lessonTitle").val();
-    var description = $("#lessonDesc").val();
+    var title = $("#title").val();
+    var description = $("#content").val();
     $.ajax({
       url: "../php/lesson_create.php",
       type: "post",
       data: {
-        lessonTitle: title,
+        title: title,
         lessonContent: description,
       },
       success: function (response) {
@@ -52,16 +78,14 @@ $(document).ready(function () {
           });
         }
         if (res.status == 200) {
-          $(".alert").hide().slideDown();
           form.reset();
-        } else {
-          $(".alert").hide().slideDown();
         }
         if (res.errorFields) {
           res.errorFields.forEach((element) => {
             $("#" + element).addClass("border-danger");
           });
         }
+        $(".alert").hide().slideDown();
         $(".alert-message").text(res.message);
       },
       error: function () {
@@ -156,5 +180,11 @@ $(document).ready(function () {
         $(".alert-message").text(res.message);
       },
     });
+  });
+  $(".lesson-update").click(function () {
+    var id = $(this).data("id");
+    var url = "adminlessoncreate.php?";
+    url += "id=" + encodeURIComponent(id);
+    window.location.href = url;
   });
 });

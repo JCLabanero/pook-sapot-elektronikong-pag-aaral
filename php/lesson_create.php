@@ -1,8 +1,8 @@
 <?php
 session_start();
 // Read the submitted form data
-$lessonTitle = $_POST["lessonTitle"];
-$lessonContent = $_POST["lessonContent"];
+$lessonTitle = $_POST["title"];
+$lessonContent = $_POST["content"];
 
 // Generate a unique ID for the lesson
 $lessonId = uniqid();
