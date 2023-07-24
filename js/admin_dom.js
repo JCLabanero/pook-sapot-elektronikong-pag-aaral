@@ -42,15 +42,17 @@ $(document).ready(function () {
       success: function (response) {
         var res = $.parseJSON(response);
         $(".form-control").removeClass("border-success border-danger");
-        if (res.successFields) {
-          res.successFields.forEach((element) => {
+        if (res.updatedFields) {
+          res.updatedFields.forEach((element) => {
             $("#" + element).addClass("border-success");
+            if (element == "email")
+              $("#" + element).attr("placeholder", $("#email").val());
+            if (element == "username")
+              $("#" + element).attr("placeholder", $("#username").val());
           });
         }
         if (res.status == 200) {
           $(".alert").hide().slideDown();
-          $("#username").attr("placeholder", username);
-          $("#email").attr("placeholder", email);
           form.reset();
         } else {
           $(".alert").hide().slideDown();
