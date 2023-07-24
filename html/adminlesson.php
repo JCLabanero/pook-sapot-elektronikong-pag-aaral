@@ -20,7 +20,7 @@ include_once("../includes/start_in.php");
                         $content = $lesson->getElementsByTagName("content")->item(0)->nodeValue;
                         $id = $lesson->getElementsByTagName("id")->item(0)->nodeValue;
                     ?>
-                        <div class="accordion-item">
+                        <div class="accordion-item mb-1">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#data<?php echo $id ?>" aria-expanded="true" aria-controls="data<?php echo $id ?>">
                                     <?php echo $title ?>
