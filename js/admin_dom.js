@@ -70,12 +70,10 @@ $(document).ready(function () {
   $("#editAccountForm").submit(function (event) {
     event.preventDefault(); // Prevent the default form submission
     var form = $(this);
-    var username = $("#username").val();
-    var email = $("#email").val();
     data = {
       id: $("#id").val(),
-      username: username,
-      email: email,
+      username: $("#username").val(),
+      email: $("#email").val(),
       password: $("#password").val(),
     };
 
@@ -89,13 +87,15 @@ $(document).ready(function () {
         if (res.updatedFields) {
           res.updatedFields.forEach((element) => {
             $("#" + element).addClass("border-success");
+            if (element == "email")
+              $("#" + element).attr("placeholder", $("#email").val());
+            if (element == "username")
+              $("#" + element).attr("placeholder", $("#username").val());
           });
         }
         if (res.status == 200) {
           $(".alert").hide().slideDown();
           form[0].reset();
-          $("#username").attr("placeholder", username);
-          $("#email").attr("placeholder", email);
         }
         if (res.errorFields) {
           res.errorFields.forEach((element) => {
