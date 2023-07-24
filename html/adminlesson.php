@@ -20,7 +20,7 @@ include_once("../includes/start_in.php");
                         $content = $lesson->getElementsByTagName("content")->item(0)->nodeValue;
                         $id = $lesson->getElementsByTagName("id")->item(0)->nodeValue;
                     ?>
-                        <div class="accordion-item mb-1">
+                        <div id="<?php echo $id ?>" class="accordion-item mb-1">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#data<?php echo $id ?>" aria-expanded="true" aria-controls="data<?php echo $id ?>">
                                     <?php echo $title ?>
@@ -29,6 +29,10 @@ include_once("../includes/start_in.php");
                             <div id="data<?php echo $id ?>" class="accordion-collapse collapse collapse" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <?php echo $content ?>
+                                </div>
+                                <div class="accordion-footer d-flex justify-content-end m-1">
+                                    <button data-id="<?php echo $id ?>" class="btn-primary btn mx-1 lesson-edit">Edit</button>
+                                    <button data-id="<?php echo $id ?>" class="btn-danger btn mx-1 lesson-delete">Delete</button>
                                 </div>
                             </div>
                         </div>

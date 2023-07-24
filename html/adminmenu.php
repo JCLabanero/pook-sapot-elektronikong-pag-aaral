@@ -32,8 +32,8 @@ require "../includes/start_in.php";
               <td><?php echo $username ?></td>
               <td><?php echo $email ?></td>
               <td>
-                <button data-id="<?php echo $id ?>" class="btn btn-success"><i class='bi bi-pencil-square'></i></button>
-                <button data-id="<?php echo $id ?>" class="btn btn-danger"><i class='bi bi-trash'></i></button>
+                <button data-id="<?php echo $id ?>" class="btn btn-success account-edit"><i class='bi bi-pencil-square'></i></button>
+                <button data-id="<?php echo $id ?>" class="btn btn-danger account-delete"><i class='bi bi-trash'></i></button>
                 <?php ?>
               </td>
             </tr>

@@ -16,6 +16,7 @@ $newLessonNode = $xml->addChild("lesson");
 $newLessonNode->addChild("id", $lessonId);
 $newLessonNode->addChild("title", $lessonTitle);
 $newLessonNode->addChild("content", $lessonContent);
+$newLessonNode->addChild("author", $_SESSION["id"]);
 // Save the updated XML file
 $xml->asXML($lessonsFile);
 // Format the XML output

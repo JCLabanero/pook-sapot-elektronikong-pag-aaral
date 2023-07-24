@@ -10,51 +10,17 @@
     <title>Variables and Data Types</title>
     <content>This lesson covers variables and data types in Java.</content>
   </lesson>
+  
+  
+  
+  
+  
+  
+  
   <lesson>
-    <id>64b171eeb12ea</id>
-    <title>john</title>
-    <content>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod soluta impedit tempore
-      pariatur, commodi accusantium?</content>
-  </lesson>
-  <lesson>
-    <id>64b173481cedc</id>
-    <title>Lesson 3</title>
-    <content>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti itaque quo expedita
-      consequuntur ab eaque ex perferendis possimus fuga veniam dolor delectus quis enim iure ut,
-      nisi neque similique laudantium?</content>
-  </lesson>
-  <lesson>
-    <id>64b17388ea62d</id>
-    <title>lesson 6</title>
-    <content>This is the ne lesson 6 oyw</content>
-  </lesson>
-  <lesson>
-    <id>64b233037ffe8</id>
-    <title>Logical Statements</title>
-    <content>Logical statements in java are if and switch statements</content>
-  </lesson>
-  <lesson>
-    <id>64b23672bba56</id>
-    <title>Lesson 8</title>
-    <content>Hays</content>
-  </lesson>
-  <lesson>
-    <id>64b236a8718d7</id>
-    <title>New lesson</title>
-    <content>This</content>
-  </lesson>
-  <lesson>
-    <id>64b236e46166d</id>
-    <title>New</title>
-    <content>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, quam ducimus sit ipsa ut
-      accusantium, dolorem quis voluptas minus harum, provident dolore rerum. Quaerat repellat animi
-      architecto a maxime quidem harum facere. Exercitationem, laboriosam! Molestias rerum ducimus
-      aliquam soluta assumenda sint fuga earum nisi perferendis nostrum. Consequatur necessitatibus
-      animi ducimus eum quibusdam asperiores iusto autem, quos nisi dolor veniam, aliquid nemo
-      exercitationem officiis? Repellat itaque, repudiandae suscipit asperiores deserunt culpa sit
-      saepe necessitatibus nulla fuga ipsum sint perspiciatis voluptatibus cum nesciunt tempora.
-      Repellendus minus nam veniam, assumenda nisi maiores, aperiam doloremque autem cumque enim ad
-      ipsam, magni mollitia nihil excepturi!
-</content>
+    <id>64be74610f01f</id>
+    <title>Topic 1: Java Basics</title>
+    <content>This is the Java Basics of the Java programming language</content>
+    <author>64a97c4fa45db</author>
   </lesson>
 </lessons>

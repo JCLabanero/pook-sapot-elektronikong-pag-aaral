@@ -114,7 +114,7 @@ $(document).ready(function () {
   });
 
   // Event delegation to handle click events on buttons with the 'btn-danger' class
-  $(document).on("click", "button.btn-success", function () {
+  $(document).on("click", "button.account-edit", function () {
     // Get the data attributes from the button
     var id = $(this).data("id");
 
@@ -125,7 +125,7 @@ $(document).ready(function () {
     window.location.href = url;
   });
 
-  $(document).on("click", "button.btn-danger", function () {
+  $(document).on("click", "button.account-delete", function () {
     // Get the data attributes from the button
     var id = $(this).data("id");
     $.ajax({
@@ -137,6 +137,22 @@ $(document).ready(function () {
         if (res.status == 200) {
           $(".alert").hide().slideDown();
         }
+        $(".alert-message").text(res.message);
+      },
+    });
+  });
+  $(".lesson-delete").click(function () {
+    var id = $(this).data("id");
+    $.ajax({
+      url: "../php/lesson_delete.php",
+      type: "POST",
+      data: { id: id },
+      success: function (response) {
+        var res = $.parseJSON(response);
+        if (res.status == 200) {
+          $("#" + id).fadeOut();
+        }
+        $(".alert").hide().slideDown();
         $(".alert-message").text(res.message);
       },
     });
