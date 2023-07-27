@@ -31,16 +31,21 @@ $(document).ready(function () {
   $("#lessonCreateForm").submit(function (event) {
     event.preventDefault();
     var title = $("#title").val();
-    var description = $("#content").val();
+    var content = $("#content").val();
+    var form = $(this)[0];
     $.ajax({
       url: "../php/lesson_create.php",
       type: "post",
       data: {
         title: title,
-        lessonContent: description,
+        content: content,
       },
       success: function (response) {
-        window.location.href = "adminlesson.php";
+        var res = $.parseJSON(response);
+        if (res.status == 200) form.reset();
+
+        $(".alert").hide().slideDown();
+        $(".alert-message").text(res.message);
       },
       error: function () {
         alert("error!");
@@ -167,6 +172,7 @@ $(document).ready(function () {
   });
   $(".lesson-delete").click(function () {
     var id = $(this).data("id");
+    var isInside = $(this).data("inside");
     $.ajax({
       url: "../php/lesson_delete.php",
       type: "POST",
@@ -178,6 +184,9 @@ $(document).ready(function () {
         }
         $(".alert").hide().slideDown();
         $(".alert-message").text(res.message);
+        if (isInside == "true" && res.status == 200) {
+          window.location.href = "adminlesson.php";
+        }
       },
     });
   });

@@ -1,8 +1,13 @@
 <?php
 session_start();
 // Read the submitted form data
-$lessonTitle = $_POST["title"];
-$lessonContent = $_POST["content"];
+$data = array(
+    "title" => $_POST["title"],
+    "content" => $_POST["content"],
+);
+
+if (empty($data["title"]) || empty($data["content"]))
+    returnRequest(400, "Create lesson failed");
 
 // Generate a unique ID for the lesson
 $lessonId = uniqid();
@@ -14,8 +19,8 @@ $xml = simplexml_load_file($lessonsFile);
 // Append the new lesson to the XML
 $newLessonNode = $xml->addChild("lesson");
 $newLessonNode->addChild("id", $lessonId);
-$newLessonNode->addChild("title", $lessonTitle);
-$newLessonNode->addChild("content", $lessonContent);
+$newLessonNode->addChild("title", $data["title"]);
+$newLessonNode->addChild("content", $data["content"]);
 $newLessonNode->addChild("author", $_SESSION["id"]);
 // Save the updated XML file
 $xml->asXML($lessonsFile);
@@ -26,5 +31,14 @@ $dom->formatOutput = true;
 $dom->load($lessonsFile);
 $dom->save($lessonsFile);
 
-echo "Lesson created successfully.";
-$_SESSION["alert_message"] = "Lesson created successfully.";
+returnRequest(200, "Created {$data['title']} Lesson Successfully");
+
+function returnRequest($code, $message)
+{
+    $response = [
+        "status" => $code,
+        "message" => $message,
+    ];
+    echo json_encode($response);
+    exit;
+}

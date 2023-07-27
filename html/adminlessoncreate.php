@@ -5,6 +5,8 @@ $formName = "lessonCreateForm";
 $formButton = "Create";
 $title = null;
 $content = null;
+$lessonId = null;
+$id = null;
 if (isset($_REQUEST["id"])) {
     $formName = "lessonUpdateForm";
     $formButton = "Update";
@@ -26,7 +28,7 @@ if (isset($_REQUEST["id"])) {
     <main class="containter">
         <div class="">
             <form action="" id=<?php echo $formName ?> class="w-50 m-auto">
-                <input type="hidden" name="id" value="<?php echo $_REQUEST["id"]; ?>">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" class="form-control" id="title" value="<?php echo $title ?>" required>
@@ -37,6 +39,9 @@ if (isset($_REQUEST["id"])) {
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary"><?php echo $formButton ?></button>
+                    <?php if (!empty($id)) { ?>
+                        <button type="button" data-id="<?php echo $lessonId ?>" data-inside="true" class="btn btn-danger lesson-delete">Delete</button>
+                    <?php } ?>
                 </div>
             </form>
         </div>

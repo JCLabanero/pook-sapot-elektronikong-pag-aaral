@@ -1,15 +1,5 @@
 <header>
-  <?php
-  // if (isset($_SESSION["alert_message"])) {
-  //   echo "<div class='alert alert-success text-center my-1 alert-dismissible fade show' id='alert-box' role='alert'>";
-  //   echo "<i class='bi bi-check-circle me-2 h5 align-middle'></i>";
-  //   echo $_SESSION["alert_message"];
-  //   echo "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
-  //   echo "</div>";
-  //   unset($_SESSION["alert_message"]);
-  // }
-  ?>
-  <div class="my-2 alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
+  <div class="my-2 mx-1 alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
     <p class="alert-message my-auto">You should check in on some of those fields below.</p>
     <button type="button" class="btn-close" id="alert-close"></button>
   </div>

@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lessons>
   <lesson>
-    <id>lesson1</id>
-    <title>Introduction to Java</title>
-    <content>This lesson provides an introduction to Java programming language. Hey</content>
-  </lesson>
-  <lesson>
-    <id>lesson2</id>
-    <title>Variables and Data Types</title>
-    <content>This lesson covers variables and data types in Java.</content>
-  </lesson>
-  <lesson>
-    <id>64be74610f01f</id>
-    <title>Topic 1: Java Basics</title>
-    <content>This is the Java Basics of the Java programming language</content>
-    <author>64a97c4fa45db</author>
+    <id>64c25da253452</id>
+    <title>New Lesson</title>
+    <content>Created a new lesson</content>
+    <author>64ba9fbfafd82</author>
   </lesson>
 </lessons>
