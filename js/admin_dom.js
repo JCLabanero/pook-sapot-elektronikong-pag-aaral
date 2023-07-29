@@ -28,30 +28,30 @@ $(document).ready(function () {
       },
     });
   });
-  $("#lessonCreateForm").submit(function (event) {
-    event.preventDefault();
-    var title = $("#title").val();
-    var content = $("#content").val();
-    var form = $(this)[0];
-    $.ajax({
-      url: "../php/lesson_create.php",
-      type: "post",
-      data: {
-        title: title,
-        content: content,
-      },
-      success: function (response) {
-        var res = $.parseJSON(response);
-        if (res.status == 200) form.reset();
+  // $("#lessonCreateForm").submit(function (event) {
+  //   event.preventDefault();
+  //   var title = $("#title").val();
+  //   var content = $("#content").val();
+  //   var form = $(this)[0];
+  //   $.ajax({
+  //     url: "../php/lesson_create.php",
+  //     type: "post",
+  //     data: {
+  //       title: title,
+  //       content: content,
+  //     },
+  //     success: function (response) {
+  //       var res = $.parseJSON(response);
+  //       if (res.status == 200) form.reset();
 
-        $(".alert").hide().slideDown();
-        $(".alert-message").text(res.message);
-      },
-      error: function () {
-        alert("error!");
-      },
-    });
-  });
+  //       $(".alert").hide().slideDown();
+  //       $(".alert-message").text(res.message);
+  //     },
+  //     error: function () {
+  //       alert("error!");
+  //     },
+  //   });
+  // });
   $("#updateAccountForm").submit(function (event) {
     event.preventDefault();
     var form = $(this)[0];
@@ -195,5 +195,46 @@ $(document).ready(function () {
     var url = "adminlessoncreate.php?";
     url += "id=" + encodeURIComponent(id);
     window.location.href = url;
+  });
+
+  $("#lessonCreateForm").submit(function (event) {
+    event.preventDefault();
+    const title = $("#title").val();
+    const content = $("#content").val();
+    const videoLink = $("#videoLink").val();
+    const pdfSource = $("#pdfSource")[0].files[0];
+    var form = $(this)[0];
+
+    // Create a new FormData object
+    var formData = new FormData();
+
+    // Append the form data to the FormData object
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("videoLink", videoLink);
+    formData.append("pdfSource", pdfSource);
+
+    $.ajax({
+      url: "../php/lesson_create.php",
+      type: "POST",
+      data: formData, // Use the FormData object as the data
+      processData: false, // Prevent jQuery from processing data
+      contentType: false, // Prevent jQuery from setting content type
+      success: function (response) {
+        var res = $.parseJSON(response);
+        if (res.status === 200) form.reset();
+
+        $(".alert").hide().slideDown();
+        $(".alert-message").text(res.message);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log("AJAX Request Error:");
+        console.log("jqXHR:", jqXHR);
+        console.log("textStatus:", textStatus);
+        console.log("errorThrown:", errorThrown);
+
+        alert("An error occurred. Please check the console for details.");
+      },
+    });
   });
 });

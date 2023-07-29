@@ -38,6 +38,14 @@ if (isset($_REQUEST["id"])) {
                     <textarea class="form-control" id="content" rows="5" required><?php echo $content ?></textarea>
                 </div>
                 <div class="mb-3">
+                    <label for="videoLink">Video Link (Optional):</label>
+                    <input type="url" id="videoLink">
+                </div>
+                <div class="mb-3">
+                    <label for="pdfSource">PDF Source (Optional):</label>
+                    <input type="file" id="pdfSource" class="form-control">
+                </div>
+                <div class="mb-3">
                     <button type="submit" class="btn btn-primary"><?php echo $formButton ?></button>
                     <?php if (!empty($id)) { ?>
                         <button type="button" data-id="<?php echo $lessonId ?>" data-inside="true" class="btn btn-danger lesson-delete">Delete</button>
