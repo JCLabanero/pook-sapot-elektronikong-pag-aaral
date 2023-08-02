@@ -1,3 +1,11 @@
 <?xml version="1.0"?>
 <lessons>
-<lesson><id>64c4f7fdbca3f</id><title>Lesson Number 1</title><content>Lezsagow</content><videoLink>https://getbootstrap.com/docs/5.3/forms/form-control/#file-input</videoLink><pdfSource>../files/student_completion_form.pdf</pdfSource><author>64ba9fbfafd82</author></lesson></lessons>
+  <lesson>
+    <id>64c4f7fdbca3f</id>
+    <title>Lesson Number 1</title>
+    <content>Lezsagow</content>
+    <videoLink>https://getbootstrap.com/docs/5.3/forms/form-control/#file-input</videoLink>
+    <pdfSource>../files/student_completion_form.pdf</pdfSource>
+    <author>64ba9fbfafd82</author>
+  </lesson>
+<lesson><id>64c68b3937313</id><title>Both included</title><content>noice</content><author>64ba9fbfafd82</author></lesson><lesson><id>64c68b677696e</id><title>carlo</title><content>asdf</content><author>64ba9fbfafd82</author></lesson></lessons>

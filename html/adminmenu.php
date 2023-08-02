@@ -27,7 +27,7 @@ require "../includes/start_in.php";
             if ($_SESSION["id"] == $id)
               continue;
           ?>
-            <tr>
+            <tr id="<?php echo $id ?>">
               <td><?php echo $id ?></td>
               <td><?php echo $username ?></td>
               <td><?php echo $email ?></td>

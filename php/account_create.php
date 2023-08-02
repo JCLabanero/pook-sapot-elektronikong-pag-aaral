@@ -1,88 +1,85 @@
 <?php
-// Get the username and password from the AJAX request
-$data = array(
-  'username' => $_REQUEST['username'],
-  'email' => $_REQUEST['email'],
-  'password' => $_REQUEST['password']
-);
-
-$missingFields = [];
-
-foreach ($data as $key => $value) {
-  if (empty($value)) {
-    $missingFields[] = $key;
-  }
-}
-if (!empty($missingFields)) {
-  returnRequest(400, "Fields are required.", $missingFields);
+// Data validation and error reporting
+$errors = [];
+$errorMessage = "Validation failed";
+$data = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+if (empty($data['username'])) {
+  $errors[] = "username";
 }
 $error = validateUsername($data['username']);
-if (!empty($error)) {
-  returnRequest(403, $error, ['username']);
+if ($error) {
+  $errors[] = $error;
+}
+if (empty($data['email'])) {
+  $errors[] = "email";
 }
 $error = validateEmail($data['email']);
-if (!empty($error)) {
-  returnRequest(403, $error, ['email']);
+if ($error) {
+  $errors[] = $error;
+}
+if (empty($data['password'])) {
+  $errors[] = "password";
 }
 $error = validatePassword($data['password']);
-if (!empty($error)) {
-  returnRequest(403, $error, ['password']);
+if ($error) {
+  $errorMessage = $error;
+  $errors[] = ["password"];
+}
+
+// Return errors if any
+if (!empty($errors)) {
+  returnRequest(400, $errorMessage, $errors);
 }
 
 // Load the XML file
 $xml = new DOMDocument();
 $xml->preserveWhiteSpace = false;
-$xml->load('../xml/accounts.xml'); // Replace 'accounts.xml' with the path to your XML file
+$xml->load('../xml/accounts.xml');
 
 // Check if the username or email already exists
 $existingUser = $xml->getElementsByTagName('user');
 foreach ($existingUser as $user) {
   $existingUsername = $user->getElementsByTagName('username')->item(0)->nodeValue;
   $existingEmail = $user->getElementsByTagName('email')->item(0)->nodeValue;
-  if ($existingEmail === $data['email']) {
-    returnRequest(403, "Email already exists", ['email']);
+  if (strcasecmp($existingEmail, $data['email']) === 0) {
+    returnRequest(403, "Email already exists.", ['email']);
   }
-  if ($existingUsername === $data['username']) {
-    returnRequest(403, "Username already exists", ['email']);
+  if (strcasecmp($existingUsername, $data['username']) === 0) {
+    returnRequest(403, "Username already exists.", ['username']);
   }
 }
 
 // Create a new user element
 $user = $xml->createElement('user');
-$user->setAttribute('id', uniqid()); // Generate a unique ID for the user
+$user->setAttribute('id', uniqid());
 
 // Create username element and append it to the user element
-$usernameElement = $xml->createElement('username', $data['username']);
-$user->appendChild($usernameElement);
+$user->appendChild($xml->createElement('username', $data['username']));
 
 // Create password element and append it to the user element
-$encryptedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
-$passwordElement = $xml->createElement('password', $encryptedPassword);
-$user->appendChild($passwordElement);
+$user->appendChild($xml->createElement('password', password_hash($data['password'], PASSWORD_DEFAULT)));
 
 // Create email element and append it to the user element
-$emailElement = $xml->createElement('email', $data['email']);
-$user->appendChild($emailElement);
+$user->appendChild($xml->createElement('email', $data['email']));
 
 // Append the user element to the root element of the XML file
 $root = $xml->documentElement;
 $root->appendChild($user);
 
 $xml->formatOutput = true;
+
 // Save the modified XML file
-$xml->save('../xml/accounts.xml'); // Replace 'accounts.xml' with the path to your XML file
-// $formattedXML = $xml->saveXML();
-// file_put_contents('../xml/accounts.xml',$formattedXML);
+$xml->save('../xml/accounts.xml');
 
-// Return a response to the JavaScript code
-echo returnRequest(200, "Registration success, to login ");
+// Return success response
+returnRequest(200, "Registration success. You can now login.");
 
-function returnRequest($code, $message, $missingFields = [])
+function returnRequest($code, $message, $errors = [])
 {
   $response = [
     "status" => $code,
-    "message" => "$message",
-    "missingFields" => $missingFields
+    "message" => $message,
+    "errors" => $errors
   ];
   echo json_encode($response);
   exit;
