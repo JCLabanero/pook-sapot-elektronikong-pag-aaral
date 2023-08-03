@@ -28,6 +28,26 @@ $(document).ready(function () {
 			},
 		});
 	});
+	$("#quizCreateForm").submit(function (event) {
+		event.preventDefault();
+		var answers = $("[name^='answer']")
+			.map(function () {
+				return $(this).val();
+			})
+			.get();
+		// console.log(answers);
+		$.ajax({
+			url: "../php/quiz_create.php",
+			type: "POST",
+			data: { question: $("#question").val(), answers: answers },
+			success: function (response) {
+				var res = $.parseJSON(response);
+				if (res.status == 200) {
+					alert(res.message);
+				}
+			},
+		});
+	});
 	// $("#lessonCreateForm").submit(function (event) {
 	//   event.preventDefault();
 	//   var title = $("#title").val();
@@ -196,6 +216,18 @@ $(document).ready(function () {
 		var url = "adminlessoncontrol.php?";
 		url += "id=" + encodeURIComponent(id);
 		window.location.href = url;
+	});
+	$("#add-answer").click(function (params) {
+		var count = $(this).data("cnt");
+		count++;
+		$(this).data("cnt", count);
+		var answer = $("#answer-holder");
+		var newAnswerHolder = $("<input>");
+		newAnswerHolder.attr("type", "text");
+		newAnswerHolder.attr("name", "answer");
+		newAnswerHolder.addClass("w-100");
+		newAnswerHolder.attr("placeholder", "Answer #" + count);
+		answer.append(newAnswerHolder);
 	});
 
 	$("#lessonCreateForm").submit(function (event) {

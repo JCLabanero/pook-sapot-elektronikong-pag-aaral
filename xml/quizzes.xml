@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quizzes>
     <quiz>
-        <id></id>
-        <lid></lid>
-        <question>
-            This is the question
-        </question>
+        <id>64cbcebc5a6a9</id>
+        <lid>test</lid>
+        <question>123</question>
         <answers>
-            <ra>this is right</ra>
-            <wa>wrong</wa>
-            <wa>wrong</wa>
-            <wa>wrong</wa>
+            <ra>12</ra>
+            <wa>12</wa>
+            <wa>313</wa>
         </answers>
     </quiz>
 </quizzes>
