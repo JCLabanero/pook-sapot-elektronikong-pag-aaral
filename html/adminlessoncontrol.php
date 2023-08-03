@@ -7,6 +7,8 @@ $title = null;
 $content = null;
 $lessonId = null;
 $id = null;
+$link = null;
+$pdf = null;
 if (isset($_REQUEST["id"])) {
     $formName = "lessonUpdateForm";
     $formButton = "Update";
@@ -16,9 +18,13 @@ if (isset($_REQUEST["id"])) {
         if ($id == $lessonId) {
             $title = $lesson->getElementsByTagName("title")->item(0)->nodeValue;
             $content = $lesson->getElementsByTagName("content")->item(0)->nodeValue;
+            $link = $lesson->getElementsByTagName("videoLink")->item(0);
+            $pdf = $lesson->getElementsByTagName("pdfSource")->item(0);
         }
     }
 }
+$link = $link ? $link->nodeValue : null;
+$pdf = $pdf ? $pdf->nodeValue : null;
 ?>
 
 <body>
@@ -39,10 +45,10 @@ if (isset($_REQUEST["id"])) {
                 </div>
                 <div class="mb-3">
                     <label for="videoLink">Video Link (Optional):</label>
-                    <input type="url" id="videoLink">
+                    <input type="url" id="videoLink" class="w-100" value="<?php echo $link ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="pdfSource">PDF Source (Optional):</label>
+                    <label for="pdfSource">PDF Source (Optional): <?php echo basename($pdf) ?></label>
                     <input type="file" id="pdfSource" class="form-control">
                 </div>
                 <div class="mb-3">

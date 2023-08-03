@@ -8,4 +8,23 @@
     <pdfSource>../files/student_completion_form.pdf</pdfSource>
     <author>64ba9fbfafd82</author>
   </lesson>
-<lesson><id>64c68b3937313</id><title>Both included</title><content>noice</content><author>64ba9fbfafd82</author></lesson><lesson><id>64c68b677696e</id><title>carlo</title><content>asdf</content><author>64ba9fbfafd82</author></lesson></lessons>
+  <lesson>
+    <id>64c68b3937313</id>
+    <title>Both included</title>
+    <content>noice</content>
+    <author>64ba9fbfafd82</author>
+  </lesson>
+  <lesson>
+    <id>64cba8f2d0a71</id>
+    <title>New title</title>
+    <content>hey</content>
+    <author>64ba9fbfafd82</author>
+  </lesson>
+  <lesson>
+    <id>64cba9039eb4f</id>
+    <title>Both included</title>
+    <content>new one again</content>
+    <videoLink>https://getbootstrap.com/docs/5.3/forms/form-control/#file-input</videoLink>
+    <author>64ba9fbfafd82</author>
+  </lesson>
+</lessons>

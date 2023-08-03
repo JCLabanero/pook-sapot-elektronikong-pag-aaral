@@ -19,6 +19,10 @@ include_once("../includes/start_in.php");
                         $title = $lesson->getElementsByTagName("title")->item(0)->nodeValue;
                         $content = $lesson->getElementsByTagName("content")->item(0)->nodeValue;
                         $id = $lesson->getElementsByTagName("id")->item(0)->nodeValue;
+                        $link = $lesson->getElementsByTagName("videoLink")->item(0);
+                        $pdf = $lesson->getElementsByTagName("pdfSource")->item(0);
+                        $link = $link ? $link->nodeValue : null;
+                        $pdf = $pdf ? $pdf->nodeValue : null;
                     ?>
                         <div id="<?php echo $id ?>" class="accordion-item mb-1">
                             <h2 class="accordion-header">
@@ -29,6 +33,23 @@ include_once("../includes/start_in.php");
                             <div id="data<?php echo $id ?>" class="accordion-collapse collapse collapse" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <?php echo $content ?>
+                                </div>
+                                <div class="accordion-footer d-flex">
+                                    <?php
+                                    if (!empty($link)) {
+                                    ?>
+                                        <a href="<?php echo $link ?>"><?php echo $link ?></a>
+                                    <?php } ?>
+
+                                </div>
+                                <div class="accordion-footer px-2">
+                                    <?php
+                                    if (!empty($pdf)) {
+                                    ?>
+                                        <button class="btn-success btn d-block w-100"><?php echo basename($pdf) ?></button>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                                 <div class="accordion-footer d-flex justify-content-end m-1">
                                     <button data-id="<?php echo $id ?>" class="btn-primary btn mx-1 lesson-update">Edit</button>
@@ -43,7 +64,7 @@ include_once("../includes/start_in.php");
             </div>
             <div class="col-lg-3 bg-success ">Sidebar
                 <div class="row">
-                    <a href="adminlessoncreate.php" class="btn btn-primary">Create Lesson</a>
+                    <a href="adminlessoncontrol.php" class="btn btn-primary">Create Lesson</a>
                 </div>
             </div>
         </div>

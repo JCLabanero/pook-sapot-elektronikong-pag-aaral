@@ -193,7 +193,7 @@ $(document).ready(function () {
 	});
 	$(".lesson-update").click(function () {
 		var id = $(this).data("id");
-		var url = "adminlessoncreate.php?";
+		var url = "adminlessoncontrol.php?";
 		url += "id=" + encodeURIComponent(id);
 		window.location.href = url;
 	});

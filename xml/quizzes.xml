@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quizzes>
+    <quiz>
+        <id></id>
+        <lid></lid>
+        <question>
+            This is the question
+        </question>
+        <answers>
+            <ra>this is right</ra>
+            <wa>wrong</wa>
+            <wa>wrong</wa>
+            <wa>wrong</wa>
+        </answers>
+    </quiz>
+</quizzes>
