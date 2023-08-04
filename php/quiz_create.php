@@ -11,9 +11,9 @@ if (!file_exists($xmlPath) || !$xml->load($xmlPath)) {
 }
 
 $data = array(
-    "lid" => "test",
-    "question" => $_POST["question"],
-    "answers" => $_POST["answers"],
+    "lid" => $_REQUEST["lid"],
+    "question" => $_REQUEST["question"],
+    "answers" => $_REQUEST["answers"],
 );
 
 
@@ -25,8 +25,10 @@ $quiz->appendChild($xml->createElement("question", $data["question"]));
 $quiz->appendChild($answers);
 // echo $data["answers"][0];
 foreach ($data["answers"] as $index => $answer) {
-    if ($index == 0)
+    if ($index == 0) {
         $answers->appendChild($xml->createElement("ra", $answer));
+        continue;
+    }
     $answers->appendChild($xml->createElement("wa", $answer));
 }
 $xml->documentElement->appendChild($quiz);

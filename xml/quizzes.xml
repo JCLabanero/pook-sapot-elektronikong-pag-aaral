@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <quizzes>
-    <quiz>
-        <id>64cbcebc5a6a9</id>
-        <lid>test</lid>
-        <question>123</question>
-        <answers>
-            <ra>12</ra>
-            <wa>12</wa>
-            <wa>313</wa>
-        </answers>
-    </quiz>
+  <quiz>
+    <id>64cd0891d47a5</id>
+    <lid>64c4f7fdbca3f</lid>
+    <question>What is lesson 1 about</question>
+    <answers>
+      <ra>Programming</ra>
+      <wa>Java</wa>
+      <wa>OOP</wa>
+      <wa>PHP</wa>
+    </answers>
+  </quiz>
+  <quiz>
+    <id>64cd08c9a9583</id>
+    <lid>64c4f7fdbca3f</lid>
+    <question>Hey EH</question>
+    <answers>
+      <ra>Programming</ra>
+      <wa>Java</wa>
+      <wa>OOP</wa>
+      <wa>PHP</wa>
+    </answers>
+  </quiz>
+  <quiz>
+    <id>64cd08f6664d7</id>
+    <lid>64cba8f2d0a71</lid>
+    <question>New title this one</question>
+    <answers>
+      <ra>Programming</ra>
+      <wa>Java</wa>
+      <wa>OOP</wa>
+      <wa>PHP</wa>
+    </answers>
+  </quiz>
 </quizzes>

@@ -39,7 +39,11 @@ $(document).ready(function () {
 		$.ajax({
 			url: "../php/quiz_create.php",
 			type: "POST",
-			data: { question: $("#question").val(), answers: answers },
+			data: {
+				lid: $("#lessonId").val(),
+				question: $("#question").val(),
+				answers: answers,
+			},
 			success: function (response) {
 				var res = $.parseJSON(response);
 				if (res.status == 200) {
@@ -229,7 +233,20 @@ $(document).ready(function () {
 		newAnswerHolder.attr("placeholder", "Answer #" + count);
 		answer.append(newAnswerHolder);
 	});
-
+	$("#add-answer-3").click(function () {
+		var count = $("#add-answer").data("cnt");
+		var countTotal = count + 3;
+		for (let i = count + 1; i <= countTotal; i++) {
+			var answer = $("#answer-holder");
+			var newAnswerHolder = $("<input>");
+			newAnswerHolder.attr("type", "text");
+			newAnswerHolder.attr("name", "answer");
+			newAnswerHolder.addClass("w-100");
+			newAnswerHolder.attr("placeholder", "Answer #" + i);
+			answer.append(newAnswerHolder);
+		}
+		$("#add-answer").data("cnt", countTotal);
+	});
 	$("#lessonCreateForm").submit(function (event) {
 		event.preventDefault();
 		const title = $("#title").val();
